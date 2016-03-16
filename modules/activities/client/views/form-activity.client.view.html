@@ -1,0 +1,42 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.activity._id ? 'Edit Activity' : 'New Activity'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.activityForm" class="form-horizontal" ng-submit="vm.save(vm.form.activityForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.activity.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.activityForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Activity name is required.</p>
+          </div>
+        </div>
+
+
+        <div class="form-group linealign col-sm-4" show-errors>
+          <label class="control-label" for="startDate">StartDate</label>
+          <input name="startDate" type="date" ng-model="vm.activity.startDate" id="startDate" class="form-control" placeholder="startDate" required>
+          <div ng-messages="vm.form.activityForm.startDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Activity time is required.</p>
+          </div>
+        </div>
+        <div class="form-group linealign col-sm-4" show-errors>
+          <label class="control-label" for="endDate">EndDate</label>
+          <input name="endDate" type="date" ng-model="vm.activity.endDate" id="endDate" class="form-control" placeholder="endDate" required>
+          <div ng-messages="vm.form.activityForm.endDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Activity time is required.</p>
+          </div>
+        </div>
+        <div class="col-sm-8"></div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-default" style="display:block;">{{vm.activity._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

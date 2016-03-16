@@ -35,3 +35,27 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+.from-group{
+  display: inline-block;
+}
+
+.form-control{
+  width:30%;
+}
+
+.linealign{
+  display: inline-block;
+}
+
+.linealign input{
+  width: 200px;
+}
+
+.form-group button{
+  display: block;
+  border: 1px solid black;
+
+}
+
+
