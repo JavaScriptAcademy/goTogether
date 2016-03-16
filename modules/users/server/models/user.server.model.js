@@ -48,7 +48,6 @@ var UserSchema = new Schema({
     type: String,
     unique: 'Email already exists',
     required: 'Please fill in a email',
-    lowercase: true,
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address'],
     trim: true
   },
@@ -148,18 +147,18 @@ UserSchema.methods.authenticate = function (password) {
 /**
  * Find possible not used username
  */
-UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
+UserSchema.statics.findUniqueEmail = function (email, suffix, callback) {
   var _this = this;
-  var possibleUsername = username.toLowerCase() + (suffix || '');
+  var possibleEmail = email + (suffix || '');
 
   _this.findOne({
-    username: possibleUsername
+    email: possibleEmail
   }, function (err, user) {
     if (!err) {
       if (!user) {
-        callback(possibleUsername);
+        callback(possibleEmail);
       } else {
-        return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
+        return _this.findUniqueEmail(email, (suffix || 0) + 1, callback);
       }
     } else {
       callback(null);

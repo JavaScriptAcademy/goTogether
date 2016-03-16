@@ -156,13 +156,12 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
          // var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
           var possibleUsername = providerUserProfile.email;
 
-          User.findUniqueUsername(possibleUsername, null, function (availableUsername) {
+          User.findUniqueEmail(possibleUsername, null, function (availableEmail) {
             user = new User({
               firstName: providerUserProfile.firstName,
               lastName: providerUserProfile.lastName,
-              username: availableUsername,
               displayName: providerUserProfile.displayName,
-              email: providerUserProfile.email,
+              email: availableEmail,
               profileImageURL: providerUserProfile.profileImageURL,
               provider: providerUserProfile.provider,
               providerData: providerUserProfile.providerData

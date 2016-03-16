@@ -2,7 +2,8 @@
 
 /**
  * Module dependencies.
- */var path = require('path'),
+ */
+var path = require('path'),
   mongoose = require('mongoose'),
   Invitation = mongoose.model('Invitation'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
@@ -10,4 +11,4 @@
 
 exports.sendMessage = function(req,res){
 
-}
+};
