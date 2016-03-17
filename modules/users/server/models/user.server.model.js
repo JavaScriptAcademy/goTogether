@@ -97,7 +97,9 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
-  }
+  },
+  friends:[]
+
 });
 
 /**
