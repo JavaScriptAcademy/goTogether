@@ -42,7 +42,7 @@ a:hover .header-profile-image {
   display: inline;
 }
 .sb-page-header .container{
-  height:600px;
+  height:620px;
   width:121%;
   margin-top:-18px;
   margin-left:-120px;
@@ -63,10 +63,17 @@ a:hover .header-profile-image {
 
 }
 .navbar-default a {
-    color:white !important;
+  color:white !important;
 }
 .dropdown-menu > li > a{
   color:#333 !important;
+}
+.searchbar div{
+  margin-top:6px;
+  display:inline-block;
+}
+.searchbar div input{
+  width:60% !important;
 }
 @font-face{
   font-family:"Oswald-Light-Italic";
