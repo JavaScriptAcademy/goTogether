@@ -1,4 +1,71 @@
 <section>
+ <div class="jumbotron">
+   <h1 data-ng-bind="vm.activity.activityName"></h1>
+   <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured.</p>
+ </div>
+ <div class="pull-right"
+ data-ng-show="vm.activity.isCurrentUserOwner">
+ <a class="btn btn-primary"
+ data-ui-sref="activities.edit({ activityId: vm.activity._id })">
+ <i class="glyphicon glyphicon-edit"></i>
+</a>
+<a class="btn btn-primary" data-ng-click="vm.remove()">
+ <i class="glyphicon glyphicon-trash"></i>
+</a>
+</div>
+<big>
+ <em class="text-muted">
+   Posted on
+   <span data-ng-bind="vm.activity.created | date:'mediumDate'"></span>
+   by
+   <span data-ng-if="vm.activity.user"
+   data-ng-bind="vm.activity.user.displayName"></span>
+   <span data-ng-if="!vm.activity.user">Deleted User</span>
+ </em>
+</big>
+<p class="lead" data-ng-bind="vm.activity.content"></p>
+<br>
+<hr><br><br><br>
+
+<div class="form-group">
+ <label class="col-sm-2 control-label">StartDate:</label>
+ <div class="col-sm-3">
+   <!-- <input type="text" ng-disabled="!edit"> -->
+   <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
+ </div>
+ <label class="col-sm-2 control-label">StartTime:</label>
+ <div class="col-sm-4">
+   <!-- <input type="text" ng-disabled="!edit"> -->
+   <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
+ </div>
+</div>
+<div class="clear"></div> <br><br>
+
+<div class="form-group">
+ <label class="col-sm-2 control-label">EndDate:</label>
+ <div class="col-sm-3">
+   <!-- <input type="text" ng-disabled="!edit"> -->
+   <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
+ </div>
+ <label class="col-sm-2 control-label">EndTime:</label>
+ <div class="col-sm-4">
+   <!-- <input type="text" ng-disabled="!edit"> -->
+   <span data-ng-bind="vm.activity.endTime | date:'shortTime'"></span>
+ </div>
+</div>
+<div class="clear"></div> <br><br>
+
+
+<div class="form-group">
+ <label class="col-sm-2 control-label">Participant:</label>
+ <div class="col-sm-3">
+   <!-- <input type="text" ng-disabled="!edit"> -->
+   <span data-ng-bind="vm.activity.participant"></span>
+ </div>
+</div>
+</section>
+
+<!-- <section>
   <div class="page-header">
     <h1 data-ng-bind="vm.activity.name"></h1>
   </div>
@@ -24,3 +91,4 @@
   </small>
   <p class="lead" data-ng-bind="vm.activity.content"></p>
 </section>
+ -->
