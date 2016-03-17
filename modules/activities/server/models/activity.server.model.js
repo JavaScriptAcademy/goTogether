@@ -3,42 +3,64 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+ var mongoose = require('mongoose'),
+ Schema = mongoose.Schema;
 
 /**
  * Activity Schema
  */
-var ActivitySchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
-  },
-  date: {
+ var ActivitySchema = new Schema({
+  created: {
     type: Date,
     default: Date.now
   },
-  location: {
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  activityName: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'Name cannot be blank'
+  },
+  startTime: {
+    type: Date,
+    trim: true,
+    required: 'Start Time cannot be blank'
+  },
+  endTime: {
+    type: Date
+  },
+  startDate: {
+    type: Date,
+    trim: true,
+    required: 'Start Date cannot be blank'
+  },
+  endDate: {
+    type: Date
+  },
+  activityLocation: {
     type: String,
     default: '',
     trim: true
   },
-  info: {
+  activityInfo: {
     type: String,
     default: '',
     trim: true
   },
-  organiser: {
-    type: String,
-    default: '',
-    trim: true
-  },
+  // organiser: {
+  //   type: String,
+  //   default: '',
+  //   trim: true
+  // },
   pendingParticipants: {
     type: Array,
     default: [],
-    trim: true
+    trim: true,
+    required: 'Paticipant cannot be blank'
+
   },
   acceptedParticipants: {
     type: Array,
@@ -52,4 +74,4 @@ var ActivitySchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Activity', ActivitySchema);
+ module.exports = mongoose.model('Activity', ActivitySchema);
