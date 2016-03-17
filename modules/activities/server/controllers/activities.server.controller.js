@@ -5,7 +5,9 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Activity = mongoose.model('Activity'),
+  //Activity = mongoose.model('Activity'),
+  Activity = require('../models/activity.server.model.js'),
+
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -15,13 +17,18 @@ var path = require('path'),
 exports.create = function(req, res) {
   var activity = new Activity(req.body);
   activity.user = req.user;
-
+// --------------------------------
+//  edit the activity pendingPaticipents format from string to array
+// -----------------------------------
   activity.save(function(err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+ //-------------------------------
+ // invoke the function to send the email
+ //..........................
       res.jsonp(activity);
     }
   });
@@ -80,7 +87,7 @@ exports.delete = function(req, res) {
 /**
  * List of Activities
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
   Activity.find().sort('-created').populate('user', 'displayName').exec(function(err, activities) {
     if (err) {
       return res.status(400).send({
