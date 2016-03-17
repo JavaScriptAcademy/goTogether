@@ -56,7 +56,7 @@
       </li>
       <li class='searchbar'>
         <div class="input-group">
-          <input type="text" placeholder="  Search Users..." ng-keyup='listAll()'>
+          <input type="text" ng-model="email" placeholder="  Search Users..." ng-keyup='listAll()'>
            <ul class="results" ng-show='userlist'>
               <li ng-repeat='user in users'>
                 <span>{{user.usename}}</span><br /><span>{{user.email}}</span>
