@@ -5,6 +5,12 @@ angular.module('articles').config(['$stateProvider',
   function ($stateProvider) {
     // Articles state routing
     $stateProvider
+      .state('prac', {
+        url: '/prac',
+        templateUrl: 'modules/articles/client/views/prac.client.view.html',
+        controller: 'PracController',
+        controllerAs: 'vm'
+      })
       .state('articles', {
         abstract: true,
         url: '/articles',

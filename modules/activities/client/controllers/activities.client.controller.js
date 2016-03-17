@@ -18,6 +18,11 @@
     vm.remove = remove;
     vm.save = save;
 
+    // $scope.test = function() {
+    //     angular.element("startDate").setAttribute("type","date");
+    //     console.log("k");
+    // };
+
     // Remove existing Activity
     function remove() {
       if (confirm('Are you sure you want to delete?')) {

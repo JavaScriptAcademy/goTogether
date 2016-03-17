@@ -1,0 +1,12 @@
+<section ng-controller="PracController">
+  <h2>Hello {{name}}! Prac Articles</h2>
+  This is the Prac
+
+  <p>{{articles}}</p>
+  <div ng-repeat="article in articles">
+    <div ng-if="article.title != 'haha'">
+      <h3 style="color:oranges">{{article.title}}</h3>
+      <p>{{article.content}}</p>
+    </div>
+  </div>
+</section>

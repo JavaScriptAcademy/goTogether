@@ -15,6 +15,10 @@ var path = require('path'),
 exports.create = function(req, res) {
   var activity = new Activity(req.body);
   activity.user = req.user;
+  console.log("%%%%%%");
+  var s = activity.user.participant;
+  console.log(JSON.stringify(activity));
+  console.log(s);
 
   activity.save(function(err) {
     if (err) {
@@ -80,7 +84,7 @@ exports.delete = function(req, res) {
 /**
  * List of Activities
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
   Activity.find().sort('-created').populate('user', 'displayName').exec(function(err, activities) {
     if (err) {
       return res.status(400).send({

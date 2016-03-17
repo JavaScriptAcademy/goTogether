@@ -2,33 +2,71 @@
   <div class="page-header">
     <h1>{{vm.activity._id ? 'Edit Activity' : 'New Activity'}}</h1>
   </div>
+
   <div class="col-md-12">
     <form name="vm.form.activityForm" class="form-horizontal" ng-submit="vm.save(vm.form.activityForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.activity.name" id="name" class="form-control" placeholder="Name" required>
+          <input name="name" type="text" ng-model="vm.activity.activityName" id="name" class="form-control" placeholder="Name" required>
           <div ng-messages="vm.form.activityForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Activity name is required.</p>
           </div>
         </div>
-
+        <div class="clear"></div>
 
         <div class="form-group linealign col-sm-4" show-errors>
           <label class="control-label" for="startDate">StartDate</label>
-          <input name="startDate" type="date" ng-model="vm.activity.startDate" id="startDate" class="form-control" placeholder="startDate" required>
+          <input name="startDate" type="date" ng-model="vm.activity.startDate" id="startDate" class="form-control" required>
           <div ng-messages="vm.form.activityForm.startDate.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Activity time is required.</p>
           </div>
         </div>
+
+        <div class="form-group linealign col-sm-4" show-errors>
+          <label class="control-label" for="startTime">StartTime</label>
+          <input name="startTime" type="time" ng-model="vm.activity.startTime" id="startTime" class="form-control" required>
+          <div ng-messages="vm.form.activityForm.startTime.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Activity time is required.</p>
+          </div>
+        </div>
+
+
+        <div class="clear"></div>
+
         <div class="form-group linealign col-sm-4" show-errors>
           <label class="control-label" for="endDate">EndDate</label>
-          <input name="endDate" type="date" ng-model="vm.activity.endDate" id="endDate" class="form-control" placeholder="endDate" required>
+          <input name="endDate" type="date" ng-model="vm.activity.endDate" id="endDate" class="form-control" required>
           <div ng-messages="vm.form.activityForm.endDate.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Activity time is required.</p>
           </div>
         </div>
-        <div class="col-sm-8"></div>
+        <div class="form-group linealign col-sm-4" show-errors>
+          <label class="control-label" for="endTime">EndTime</label>
+          <input name="endTime" type="time" ng-model="vm.activity.endTime" id="endTime" class="form-control" placeholder="endTime" required>
+          <div ng-messages="vm.form.activityForm.endTime.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Activity time is required.</p>
+          </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="form-group">
+          <label class="control-label" for="activityLocation">ActivityLocation</label>
+          <input name="activityLocation" type="text" ng-model="vm.activity.activityLocation" id="activityLocation" class="form-control" placeholder="activityLocation">
+        </div>
+        <div class="clear"></div>
+
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="participant">Participent</label>
+          <div class="clear"></div>
+          <input name="participant" type="text" ng-model="vm.activity.participant" id="participant" class="form-control classparticipant " placeholder="Participant" required>
+          <button class="btn-md">add</button>
+          <div ng-messages="vm.form.activityForm.participant.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Activity participant is required.</p>
+          </div>
+        </div>
+        <div class="clear"></div>
 
         <div class="form-group">
           <button type="submit" class="btn btn-default" style="display:block;">{{vm.activity._id ? 'Update' : 'Create'}}</button>
@@ -39,4 +77,6 @@
       </fieldset>
     </form>
   </div>
+
 </section>
+
