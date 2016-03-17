@@ -35,3 +35,39 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+.linealign input{
+  width: 200px;
+}
+
+.form-group button{
+  display: block;
+  border: 1px solid black;
+
+}
+
+.clear{
+  clear: both;
+}
+
+.classparticipant{
+  display: inline-block;
+}
+
+.form-group button{
+  display: inline-block;
+}
+
+.jumbotron{
+  background-image: url(http://image5.tuku.cn/pic/tiyushijie/parent-offspring_bicycle_a044/052.jpg);
+  background-size:cover;
+}
+
+.jumbotron {
+    margin-top: 20px;
+    /*padding-top: 20px;*/
+    /*padding-bottom: 20px;*/
+    /*margin-bottom: 30px;*/
+    color: inherit;
+    background-color: #eee;
+}
