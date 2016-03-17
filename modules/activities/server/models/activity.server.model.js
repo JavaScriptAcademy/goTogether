@@ -13,17 +13,43 @@ var ActivitySchema = new Schema({
   name: {
     type: String,
     default: '',
-    required: 'Please fill Activity name',
-    trim: true
+    trim: true,
+    required: 'Title cannot be blank'
   },
-  created: {
+  date: {
     type: Date,
     default: Date.now
   },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+  location: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  info: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  organiser: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  pendingParticipants: {
+    type: Array,
+    default: [],
+    trim: true
+  },
+  acceptedParticipants: {
+    type: Array,
+    default: [],
+    trim: true
+  },
+  declinedParticipants: {
+    type: Array,
+    default: [],
+    trim: true
   }
 });
 
-mongoose.model('Activity', ActivitySchema);
+module.exports = mongoose.model('Activity', ActivitySchema);
