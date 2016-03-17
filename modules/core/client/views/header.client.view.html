@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="home" class="navbar-brand">MEAN.JS</a>
+    <a ui-sref="home" class="navbar-brand">GoTogether</a>
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
@@ -53,6 +53,12 @@
             <a href="/api/auth/signout" target="_self">Signout</a>
           </li>
         </ul>
+      </li>
+      <li class='searchbar'>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search Users">
+          <button class="btn btn-secondary" ng-click='search()'>Search</button>
+        </div>
       </li>
     </ul>
   </nav>
