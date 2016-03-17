@@ -9,6 +9,36 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
+      .state('history', {
+        url: '/history',
+        templateUrl: 'modules/activities/client/views/history.client.view.html',
+        controller: 'HistoryController',
+        controllerAs: 'vm'
+      })
+      .state('pending', {
+        url: '/pending',
+        templateUrl: 'modules/activities/client/views/pending.client.view.html',
+        controller: 'PendingController',
+        controllerAs: 'vm'
+      })
+      .state('declined', {
+        url: '/declined',
+        templateUrl: 'modules/activities/client/views/declined.client.view.html',
+        controller: 'DeclinedController',
+        controllerAs: 'vm'
+      })
+      .state('upcoming', {
+        url: '/upcoming',
+        templateUrl: 'modules/activities/client/views/upcoming.client.view.html',
+        controller: 'UpcomingController',
+        controllerAs: 'vm'
+      })
+      .state('accepted', {
+        url: '/accepted',
+        templateUrl: 'modules/activities/client/views/accepted.client.view.html',
+        controller: 'AcceptedController',
+        controllerAs: 'vm'
+      })
       .state('activities', {
         abstract: true,
         url: '/activities',
