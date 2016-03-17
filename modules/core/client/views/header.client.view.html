@@ -56,8 +56,13 @@
       </li>
       <li class='searchbar'>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search Users">
-          <button class="btn btn-secondary" ng-click='search()'>Search</button>
+          <input type="text" placeholder="  Search Users..." ng-keyup='listAll()'>
+           <ul class="results" ng-show='userlist'>
+              <li ng-repeat='user in users'>
+                <span>{{user.usename}}</span><br /><span>{{user.email}}</span>
+              </li>
+           </ul>
+          <button  ng-click='search()'>Search</button>
         </div>
       </li>
     </ul>
