@@ -33,9 +33,14 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
         url: '/api/users/search',
         data: {email: $scope.email},
       }).then(function successCallback(response) {
+        if(document.getElementById('searchInput').value===""){
+          $scope.userlist = false
+        }else{
           console.log(response);
           $scope.users = response;
           $scope.userlist = true;
+        }
+
           // this callback will be called asynchronously
           // when the response is available
         }, function errorCallback(response) {
