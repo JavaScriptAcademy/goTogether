@@ -59,7 +59,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
       }
     };
     $scope.goToUserPage = function (email) {
-      window.open('/users/' + email);
+      $location.path('/users/' + email);
     }
   }
 ]);
