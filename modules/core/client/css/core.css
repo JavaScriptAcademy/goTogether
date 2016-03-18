@@ -1,3 +1,9 @@
+body {
+  padding: 0px;
+  height:100%;
+  font-family: Oswald-Regular-Roman, Tahoma, sans-serif !important;
+  letter-spacing: 0.8px;
+}
 .content {
   margin-top: 50px;
 }
@@ -34,4 +40,144 @@ a:hover .header-profile-image {
 }
 .has-error .help-inline.error-text {
   display: inline;
+}
+
+.linealign input{
+  width: 200px;
+}
+
+.form-group button{
+  display: block;
+  border: 1px solid black;
+
+}
+
+.clear{
+  clear: both;
+}
+
+.classparticipant{
+  display: inline-block;
+}
+
+.form-group button{
+  display: inline-block;
+}
+
+.jumbotron{
+  background-image: url(http://image5.tuku.cn/pic/tiyushijie/parent-offspring_bicycle_a044/052.jpg);
+  background-size:cover;
+}
+
+.jumbotron {
+    margin-top: 20px;
+    /*padding-top: 20px;*/
+    /*padding-bottom: 20px;*/
+    /*margin-bottom: 30px;*/
+    color: inherit;
+    background-color: #eee;
+}
+.sb-page-header .container{
+  height:620px;
+  width:121%;
+  margin-top:-18px;
+  margin-left:-120px;
+  background-image:url('/modules/core/client/img/landing.jpg');
+  background-size:cover;
+}
+.sb-page-header .container p{
+  margin-top:30%;
+  text-align: center;
+  color:white;
+  font-size:5em;
+}
+.navbar-default {
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: rgb(121, 234, 155);
+
+}
+.navbar-default a {
+  color:white !important;
+}
+.dropdown-menu > li > a{
+  color:#333 !important;
+}
+.searchbar .input-group *{
+  margin-top:10px;
+  display:inline-block;
+}
+.searchbar .input-group input{
+
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 7px;
+  border-color: #a8acbc #babdcc #c0c3d2;
+
+}
+.searchbar button{
+  margin-left:3px;
+  margin-top:5px;
+  border-style: none;
+  border-radius: 7px;
+  background-color:white;
+  font-size: 12px;
+  padding: 3px;
+  color: gray;
+
+}
+
+.searchbar .results {
+    position: absolute;
+    top: 35px;
+    width: 300px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #cbcfe2 #c8cee7 #c4c7d7;
+    border-radius: 3px;
+    background-color: white;
+    opacity: 0.8;
+
+}
+.searchbar .results li{
+  width:100%;
+}
+.searchbar .results li:hover{
+
+  background-color: rgba(100,100,100,0.5);
+  cursor: pointer;
+
+}
+.searchbar .results span{
+  padding-left: 7px;
+}
+@font-face{
+  font-family:"Oswald-Light-Italic";
+  src:url("/fonts/Oswald-Light-Italic/Oswald-LightItalic.ttf");
+}
+@font-face{
+  font-family:"Oswald-Regular-Italic";
+  src:url("/fonts/Oswald-Regular-Italic/Oswald-RegularItalic.ttf");
+}
+@font-face{
+  font-family:"Oswald-Bold-Italic";
+  src:url("/fonts/Oswald-Demi-Bold-Italic/Oswald-Demi-BoldItalic.ttf");
+}
+@font-face{
+  font-family:"Oswald-Light-Roman";
+  src:url("/fonts/Oswald-Light-Roman/Oswald-Light.ttf");
+}
+@font-face{
+  font-family:"Oswald-Regular-Roman";
+  src:url("/fonts/Oswald-Regular-Roman/Oswald-Regular.ttf");
+}
+@font-face{
+  font-family:"Oswald-Bold-Roman";
+  src:url("/fonts/Oswald-Demi-Bold-Roman/Oswald-DemiBold.ttf");
 }

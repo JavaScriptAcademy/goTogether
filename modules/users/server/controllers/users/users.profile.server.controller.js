@@ -58,7 +58,7 @@ exports.changeProfilePicture = function (req, res) {
   var message = null;
   var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
-  
+
   // Filtering to upload only images
   upload.fileFilter = profileUploadFileFilter;
 
@@ -93,6 +93,26 @@ exports.changeProfilePicture = function (req, res) {
       message: 'User is not signed in'
     });
   }
+};
+
+/**
+ * Update user details
+ */
+exports.search = function (req, res) {
+
+  // {"name": /.*m.*/}
+  // todo - look Regular Expression
+  User.find({ 'email': req.params.email }, function (err, data) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // todo change the below
+      res.json(data);
+    }
+  });
+
 };
 
 /**
