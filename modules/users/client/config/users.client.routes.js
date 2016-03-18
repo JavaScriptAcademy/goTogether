@@ -1,14 +1,22 @@
-'use strict';
-
+(function () {
+  'use strict';
+  angular
+    .module('users')
+    .config(routeConfig);
 // Setting up route
-angular.module('users').config(['$stateProvider',
-  function ($stateProvider) {
+  routeConfig.$inject = ['$stateProvider'];
+
+  function routeConfig($stateProvider) {
     // Users state routing
     $stateProvider
       .state('individual', {
-        url: '/users/:email',
+        url: '/users/:userId',
         templateUrl: 'modules/users/client/views/individual.client.view.html',
-        controllerAs: 'vm'
+        controller:'IndividualController',
+        controllerAs: 'vm',
+        resolve: {
+          userResolve: getIndividual
+        }
       })
       .state('settings', {
         abstract: true,
@@ -74,4 +82,13 @@ angular.module('users').config(['$stateProvider',
         templateUrl: 'modules/users/client/views/password/reset-password.client.view.html'
       });
   }
-]);
+
+  getIndividual.$inject = ['$stateParams', 'SearchUser'];
+
+  function getIndividual($stateParams, SearchUser) {
+    return SearchUser.get({
+      userId: $stateParams.userId
+    }).$promise;
+  }
+
+})();

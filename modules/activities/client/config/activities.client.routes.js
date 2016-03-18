@@ -106,4 +106,5 @@
   function newActivity(ActivitiesService) {
     return new ActivitiesService();
   }
+
 })();
