@@ -13,48 +13,10 @@ var path = require('path'),
 
 var express = require('express');
 var mailgun = require('../../../../config/lib/mailgun');
+
 //init express
 var app = express();
 
-// function sendEmail(activity) {
-//   var mailgun = new Mailgun({apiKey: api_key, domain: domain});
-//    //Invokes the method to send emails given the above data with the helper library
-//    var participants = activity.pendingParticipants[0].split("; ");
-//    participants.forEach(function (participant) {
-//      var data = {
-//             //Specify email data
-//             from: from_who,
-//             //The email to contact
-//             to: participant,
-//             //Subject and text data
-//             subject: 'Invitation to' + activity.activityName ,
-//             html: formEmailBody(participant, activity)
-//           };
-
-//           mailgun.messages().send(data, function (err, body) {
-//         //If there is an error, render the error page
-//         if (err) {
-//          console.log("got an error: ", err);
-//        }
-//          //Else we can greet and leave
-//          else {
-//           console.log('success send email to: ' + participant);
-//         }
-//       });
-//         });
-// }
-
-// function formEmailBody(email,activity) {
-//   var greeting = '<p>Hi,</p>';
-//   var greeting_message = '<p>&nbsp &nbsp There is an invitation for you, from your friend: ' + activity.user.username + '</p>';
-//   var name = '<div><br>Activity Name : </br>' + activity.activityName + '</div>';
-//   var location = '<div><br>Activity location : </br>' + activity.activityLocation + '</div>';
-//   var activity_date = '<div><br>Activity Date : </br>' + activity.startDate + ' to ' + activity.endDate + '</div>';
-//   var activity_time = '<div><br>Activity Time : </br>' + activity.startTime + ' to ' + activity.endTime + '</div>';
-//   var info = '<div><br>Activity Information : </br>' + activity.activityInfo + '</div>';
-//   var link = '<div><a href="http://localhost:6001//invitation//' + email + '">Click here to respond to this invitation.</a></div>';
-//   return greeting + greeting_message + name + location + activity_date + activity_time + info + link;
-// }
 /**
  * Create a Activity
  */
