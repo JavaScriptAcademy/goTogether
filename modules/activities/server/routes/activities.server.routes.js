@@ -17,6 +17,11 @@ module.exports = function(app) {
     .put(activities.update)
     .delete(activities.delete);
 
+  app.route('/api/activities/invitation/:email').all(activitiesPolicy.isAllowed)
+    .get(activities.read)
+    .put(activities.update)
+    .delete(activities.delete);
+
   // Finish by binding the Activity middleware
   app.param('activityId', activities.activityByID);
 };

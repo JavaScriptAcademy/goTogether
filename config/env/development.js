@@ -23,7 +23,7 @@ module.exports = {
       //  directoryPath: process.cwd(),
       //  fileName: 'access.log',
       //  rotatingLogs: { // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
-      //    active: false, // activate to use rotating logs 
+      //    active: false, // activate to use rotating logs
       //    fileName: 'access-%DATE%.log', // if rotating logs are active, this fileName setting will be used
       //    frequency: 'daily',
       //    verbose: false
@@ -99,5 +99,14 @@ module.exports = {
         roles: ['user', 'admin']
       }
     }
-  }
+  },
+  //configuration for mailgun
+  mailgun:{
+    //Your api key, from Mailgun’s Control Panel
+    api_key:'key-fa85f8e2168b0a7a3f96ff1f78d3d517',
+    //Your domain, from the Mailgun Control Panel
+    domain:'sandboxdf5afec8545f46e4a212bb2f8e4533e5.mailgun.org',
+    //Your sending email address
+    from_who:'admin@gotogether.com'
+}
 };
