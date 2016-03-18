@@ -1,10 +1,10 @@
 'use strict';
 
 (function () {
-  // Popular Controller Spec
-  describe('Popular Controller Tests', function () {
+  // Individual Controller Spec
+  describe('Individual Controller Tests', function () {
     // Initialize global variables
-    var PopularController,
+    var IndividualController,
       $scope,
       $httpBackend,
       $stateParams,
@@ -44,8 +44,8 @@
       $httpBackend = _$httpBackend_;
       $location = _$location_;
 
-      // Initialize the Popular controller.
-      PopularController = $controller('PopularController', {
+      // Initialize the Individual controller.
+      IndividualController = $controller('IndividualController', {
         $scope: $scope
       });
     }));

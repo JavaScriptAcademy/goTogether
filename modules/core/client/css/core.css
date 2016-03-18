@@ -131,6 +131,7 @@ a:hover .header-profile-image {
 .searchbar .results {
     position: absolute;
     top: 35px;
+    width: 300px;
     left: 0;
     right: 0;
     z-index: 10;
@@ -140,8 +141,17 @@ a:hover .header-profile-image {
     border-style: solid;
     border-color: #cbcfe2 #c8cee7 #c4c7d7;
     border-radius: 3px;
-    background-color: #95F2B1;
-    opacity: 0.6;
+    background-color: white;
+    opacity: 0.8;
+
+}
+.searchbar .results li{
+  width:100%;
+}
+.searchbar .results li:hover{
+
+  background-color: rgba(100,100,100,0.5);
+  cursor: pointer;
 
 }
 .searchbar .results span{

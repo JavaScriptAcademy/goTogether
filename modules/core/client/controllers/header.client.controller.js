@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', '$http', 'Authentication', 'Menus', 'Users',
-  function ($scope, $state, $http, Authentication, Menus, Users) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', '$http', 'Authentication', 'Menus',
+  function ($scope, $state, $http, Authentication, Menus) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -19,35 +19,47 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
     });
+
     $scope.userlist = false;
-    $scope.search = function(){
-      $scope.users = Users.query();
-    };
+
     $scope.listAll = function(){
       // Research $http service (which is the equivalent of jQuery.ajax())
       // $scope.users = Users.query();
       // example of $http below
+      if($scope.email === ""){
 
-      $http({
-        method: 'GET',
-        url: '/api/users/search',
-        data: {email: $scope.email},
-      }).then(function successCallback(response) {
-        if(document.getElementById('searchInput').value===""){
-          $scope.userlist = false
-        }else{
-          console.log(response);
-          $scope.users = response;
-          $scope.userlist = true;
-        }
+         $scope.userlist = false;
 
-          // this callback will be called asynchronously
-          // when the response is available
-        }, function errorCallback(response) {
+      }else{
 
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
+          $http({
+            method: 'GET',
+            url: '/api/users/search/'+$scope.email
+          }).then(function successCallback(response) {
+
+              if(response.data.length === 0) {
+
+                 $scope.users = [{'username' : 'No User Found!', 'email' : 'Try Again...'}];
+                 $scope.userlist = true;
+
+              }else{
+
+                 $scope.users = response.data;
+                 $scope.userlist = true;
+              }
+
+
+              // this callback will be called asynchronously
+              // when the response is available
+            }, function errorCallback(response) {
+
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+            });
+      }
     };
+    $scope.goToUserPage = function (email) {
+      window.open('/users/' + email);
+    }
   }
 ]);

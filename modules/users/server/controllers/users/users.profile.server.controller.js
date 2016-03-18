@@ -102,8 +102,7 @@ exports.search = function (req, res) {
 
   // {"name": /.*m.*/}
   // todo - look Regular Expression
-  console.log(req);
-  User.find({'email': /.*req.params.email.*/}, function (err, data) {
+  User.find({ 'email': req.params.email }, function (err, data) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

@@ -59,10 +59,16 @@
           <input type="text" ng-model="email" placeholder="  Search Users..." ng-keyup='listAll()'>
            <ul class="results" ng-show='userlist'>
               <li ng-repeat='user in users'>
-                <span>{{user.usename}}</span><br /><span>{{user.email}}</span>
+                <p ng-click='goToUserPage(user.email)'>
+                  <strong>
+                      <span>{{user.username}}</span>
+                  </strong> |
+                  <span>
+                    {{user.email}}
+                  </span>
+                </p>
               </li>
            </ul>
-          <button  ng-click='search()'>Search</button>
         </div>
       </li>
     </ul>
