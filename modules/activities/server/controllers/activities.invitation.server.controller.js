@@ -23,7 +23,7 @@ var app = express();
 exports.read = function(req, res) {
 
  var email = req.param('email');
- var activityId = requ.param('activityId');
+ var activityId = req.param('activityId');
  var activity = req.activity;
 
 };
