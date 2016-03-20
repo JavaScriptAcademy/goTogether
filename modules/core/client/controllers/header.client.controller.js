@@ -60,6 +60,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
     };
     $scope.goToUserPage = function (userId) {
       $window.open('/users/' + userId);
-    }
+    };
   }
 ]);

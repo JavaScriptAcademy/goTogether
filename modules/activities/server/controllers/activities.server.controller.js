@@ -7,6 +7,8 @@ var path = require('path'),
   mongoose = require('mongoose'),
 
   Activity = require('../models/activity.server.model.js'),
+  //User = require('../../../users/server/models/user.server.model.js'),
+  User = mongoose.model('User'),
 
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -23,13 +25,10 @@ var app = express();
 exports.create = function(req, res) {
   var activity = new Activity(req.body);
   activity.user = req.user;
-  var user = new User();
-
-
 // --------------------------------
 //  edit the activity pendingPaticipents format from string to array
 // -----------------------------------
-  activity.save(function(err) {
+  activity.save(function(err, activityResponse) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -37,12 +36,30 @@ exports.create = function(req, res) {
     } else {
       //send email to the participant
       mailgun.sendEmail(activity);
-      //Todo: create guest user
+
+      var condition, update, options, callback;
+      //update participant's activity list
+      activityResponse.pendingParticipants[0].split("; ").forEach(function(participantEmail) {
+          console.log(participantEmail);
+          condition = {'email': participantEmail};
+          update = {$push: {'activities': activityResponse._id}};
+          options = {multi: false, upsert: true};
+          callback = function(err) {
+            console.log('cannot upsert the user with activityId');
+          };
+          User.findOneAndUpdate(condition, update, options, callback);
+      });
+
+
+      //update organizer's activity list
+      condition = {'email': activity.user.email};
+      User.update(condition, update, options, callback);
+
+    }
 
       res.jsonp(activity);
-    }
-  });
 
+});
 
 };
 
