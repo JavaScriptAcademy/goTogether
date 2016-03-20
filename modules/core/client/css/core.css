@@ -86,7 +86,7 @@ a:hover .header-profile-image {
   background-size:cover;
 }
 .sb-page-header .container p{
-  margin-top:30%;
+  margin-top:30% !important;
   text-align: center;
   color:white;
   font-size:5em;
@@ -102,32 +102,27 @@ a:hover .header-profile-image {
   color:white !important;
 }
 .dropdown-menu > li > a{
+
   color:#333 !important;
 }
 .searchbar .input-group *{
-  margin-top:10px;
+  margin-top:12px;
   display:inline-block;
 }
 .searchbar .input-group input{
 
   border-width: 1px;
   border-style: solid;
-  border-radius: 7px;
+  border-radius: 6px;
   border-color: #a8acbc #babdcc #c0c3d2;
 
 }
-.searchbar button{
-  margin-left:3px;
-  margin-top:5px;
-  border-style: none;
-  border-radius: 7px;
-  background-color:white;
-  font-size: 12px;
-  padding: 3px;
-  color: gray;
-
+.ng-scope{
+  margin-top:0px !important;
 }
-
+.ng-scope p{
+  margin-top:0px !important;
+}
 .searchbar .results {
     position: absolute;
     top: 35px;

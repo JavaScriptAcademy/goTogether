@@ -23,6 +23,7 @@ var app = express();
 exports.create = function(req, res) {
   var activity = new Activity(req.body);
   activity.user = req.user;
+  var user = new User();
 
 
 // --------------------------------
@@ -34,13 +35,15 @@ exports.create = function(req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-       //-------------------------------
- // invoke the function to send the email
- //..........................
+      //send email to the participant
       mailgun.sendEmail(activity);
+      //Todo: create guest user
+
       res.jsonp(activity);
     }
   });
+
+
 };
 
 /**
