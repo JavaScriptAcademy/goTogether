@@ -96,7 +96,7 @@ exports.changeProfilePicture = function (req, res) {
 };
 
 /**
- * Update user details
+ * search users
  */
 exports.search = function (req, res) {
 
@@ -114,7 +114,23 @@ exports.search = function (req, res) {
   });
 
 };
+/**
+ * find user by id
+ */
+exports.finduser = function (req, res) {
 
+  User.findOne({ '_id': req.params.userId }, function (err, data) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // todo change the below
+      res.json(data);
+    }
+  });
+
+};
 /**
  * Send User
  */

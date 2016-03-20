@@ -1,4 +1,3 @@
-(function () {
   'use strict';
   angular
     .module('users')
@@ -90,5 +89,3 @@
       userId: $stateParams.userId
     }).$promise;
   }
-
-})();
