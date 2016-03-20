@@ -103,7 +103,11 @@ var UserSchema = new Schema({
   }],
   activities:[{
     type:String
-  }]
+  }],
+  active: {
+    type: Boolean,
+    default: false
+  }
 
 });
 
