@@ -1,4 +1,10 @@
 <section>
+  <div class="alert alert-danger" ng-show='addFriendFail'>
+    <strong>Sorry!</strong> Add Friend Failed...Please try again later!
+  </div>
+  <div class="alert alert-success" ng-show='addFriendSuccess'>
+    <strong>Success!</strong> Add Friend Successfully!
+</div>
   <div class="page-header">
     <div class="row">
       <div class="col-md-6">
@@ -30,8 +36,8 @@
       </div>
       <hr/>
       <div class="row">
-        <div class="col-md-3"><button class='btn btn-success' ng-click='addFriend()'>Add Friend</button></div>
-        <div class="col-md-3"><button class='btn btn-default'>Go Back</button></div>
+        <div class="col-md-3"><button class='btn btn-success' ng-click='addFriend()'  ng-show='showAFButton'>Add Friend</button></div>
+        <div class="col-md-3"><button class='btn btn-default' ng-click='goHomePage()'>Go Back</button></div>
       </div>
     </div>
   </div>
