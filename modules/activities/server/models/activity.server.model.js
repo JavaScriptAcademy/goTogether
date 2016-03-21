@@ -25,20 +25,24 @@
     required: 'Name cannot be blank'
   },
   startTime: {
-    type: Date,
+    type: String,
     trim: true,
     required: 'Start Time cannot be blank'
   },
   endTime: {
-    type: Date
+    type: String,
+    trim: true,
+    required: 'End Time cannot be blank'
   },
   startDate: {
-    type: Date,
+    type: String,
     trim: true,
     required: 'Start Date cannot be blank'
   },
   endDate: {
-    type: Date
+    type: String,
+    trim: true,
+    required: 'End Date cannot be blank'
   },
   activityLocation: {
     type: String,
@@ -75,3 +79,6 @@
 });
 
  module.exports = mongoose.model('Activity', ActivitySchema);
+
+
+
