@@ -13,6 +13,12 @@
     // Individual controller logic
     // ...
     $scope.user = user;
+
+    $scope.addFriend= function(){
+
+        $resource('/api/users/friends', {userId: user._id}, {'update': {method:'PUT'}});
+    };
+
     init();
 
     function init() {
