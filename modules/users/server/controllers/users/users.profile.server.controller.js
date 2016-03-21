@@ -96,7 +96,7 @@ exports.changeProfilePicture = function (req, res) {
 };
 
 /**
- * Update user details
+ * search users
  */
 exports.search = function (req, res) {
 
@@ -114,7 +114,60 @@ exports.search = function (req, res) {
   });
 
 };
+/**
+ * find user by id
+ */
+exports.finduser = function (req, res) {
 
+  User.findOne({ '_id': req.params.userId }, function (err, data) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // todo change the below
+      res.json(data);
+    }
+  });
+
+};
+/**
+ * Update user details
+ */
+exports.addfriend = function (req, res) {
+  // Init Variables
+  var user = req.user;
+
+  // For security measurement we remove the roles from the req.body object
+  delete req.body.roles;
+
+  if (user) {
+    // Merge existing user
+    user = _.extend(user, req.body);
+    user.updated = Date.now();
+    user.displayName = user.firstName + ' ' + user.lastName;
+
+    user.save(function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        req.login(user, function (err) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            res.json(user);
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'User is not signed in'
+    });
+  }
+};
 /**
  * Send User
  */
