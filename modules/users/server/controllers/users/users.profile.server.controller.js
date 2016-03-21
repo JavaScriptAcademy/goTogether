@@ -109,6 +109,7 @@ exports.search = function (req, res) {
       });
     } else {
       // todo change the below
+
       res.json(data);
     }
   });

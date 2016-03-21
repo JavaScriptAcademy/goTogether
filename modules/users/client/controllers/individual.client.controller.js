@@ -5,9 +5,9 @@
     .module('users')
     .controller('IndividualController', IndividualController);
 
-  IndividualController.$inject = ['$scope', 'userResolve', '$resource', '$http'];
+  IndividualController.$inject = ['$scope', 'userResolve', '$resource', '$http', 'Authentication', '$location'];
 
-  function IndividualController($scope, user, $resource, $http) {
+  function IndividualController($scope, user, $resource, $http, Authentication, $location) {
     var vm = this;
     $scope.showAFButton=true;
 
@@ -15,7 +15,14 @@
     // ...
     $scope.user = user;
 
-    $scope.addFriend= function(){
+
+    var friends = Authentication.user.friends;
+
+    if(friends.includes(user._id)){
+      $scope.showAFButton=false;
+    }
+
+    $scope.addFriend = function(){
 
       $http({
             method: 'PUT',
@@ -34,6 +41,12 @@
               // called asynchronously if an error occurs
               // or server returns response with an error status.
             });
+    };
+
+    $scope.goHomePage = function(){
+
+      $location.url('/');
+
     };
 
     init();
