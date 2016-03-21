@@ -45,7 +45,13 @@
 
     $scope.goHomePage = function(){
 
-      $location.url('/');
+      if(history.length === 1){
+        $location.url('/');
+      }else{
+        history.back();
+      }
+
+
 
     };
 

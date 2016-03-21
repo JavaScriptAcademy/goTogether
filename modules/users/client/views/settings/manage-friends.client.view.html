@@ -1,0 +1,22 @@
+<section class="row">
+    <div class="page-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 ng-bind="user.username"></h1>
+          </div>
+        </div>
+    </div>
+<table class="table table-bordered">
+    <!-- On rows -->
+    <tr >
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+    </tr>
+    <tr ng-repeat='user in friends' ng-click='goToUserPage(user._id)'>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+    </tr>
+</table>
+</section>

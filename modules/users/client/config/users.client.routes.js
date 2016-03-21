@@ -41,6 +41,11 @@
         url: '/picture',
         templateUrl: 'modules/users/client/views/settings/change-profile-picture.client.view.html'
       })
+      .state('settings.friends', {
+        url: '/friends',
+        templateUrl: 'modules/users/client/views/settings/manage-friends.client.view.html',
+        controller:'FriendsController',
+      })
       .state('authentication', {
         abstract: true,
         url: '/authentication',
