@@ -28,8 +28,9 @@
 <hr><br><br><br>
 
 <div class="form-group">
+ <div class="col-md-2"></div>
  <label class="col-sm-2 control-label">StartDate:</label>
- <div class="col-sm-3">
+ <div class="col-sm-2">
    <!-- <input type="text" ng-disabled="!edit"> -->
    <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
  </div>
@@ -39,11 +40,13 @@
    <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
  </div>
 </div>
+
 <div class="clear"></div> <br><br>
 
 <div class="form-group">
+ <div class="col-md-2"></div>
  <label class="col-sm-2 control-label">EndDate:</label>
- <div class="col-sm-3">
+ <div class="col-sm-2">
    <!-- <input type="text" ng-disabled="!edit"> -->
    <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
  </div>
@@ -57,8 +60,9 @@
 
 
 <div class="form-group">
+ <div class="col-md-2"></div>
  <label class="col-sm-2 control-label">Participant:</label>
- <div class="col-sm-3">
+ <div class="col-sm-8">
    <!-- <input type="text" ng-disabled="!edit"> -->
    <span data-ng-bind="vm.activity.pendingParticipants"></span>
  </div>
