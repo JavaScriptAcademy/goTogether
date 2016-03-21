@@ -20,9 +20,12 @@
     vm.acceptActivity = acceptActivity;
     vm.rejectActivity = rejectActivity;
 
-    if($location.path().split('/')[3]){
+    if ($location.path().split('/')[3]) {
       $scope.response = true;
-    }else{
+      var email = $location.path().split('/')[3];
+      var activityId = $location.path().split('/')[2];
+      getActivityParticipantStatus(activityId, email);
+    } else {
       $scope.response = false;
     }
     // Remove existing Activity
@@ -55,6 +58,18 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
+    }
+
+    function getActivityParticipantStatus(activityId, email) {
+      $http.get('/api/activities/invitation/' + activityId + '/' + email)
+      .success(function(data){
+        console.log(data);
+        $scope.isNew = data.isNew;
+        $scope.isAccepted = data.isAccepted;
+      })
+      .error(function(err){
+        console.log(err);
+      });
     }
 
     /*

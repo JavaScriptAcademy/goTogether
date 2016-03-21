@@ -64,7 +64,7 @@
  </div>
 </div>
 <div ng-show='response'>
-  <a class="btn btn-success" data-ng-click="vm.acceptActivity()">Accept</a>
-  <a class="btn btn-warning" data-ng-click="vm.rejectActivity()">Reject</a>
+  <a class="btn btn-success" ng-hide='isAccepted' data-ng-click="vm.acceptActivity()">Accept</a>
+  <a class="btn btn-warning" ng-hide='isDeclined' data-ng-click="vm.rejectActivity()">Reject</a>
 </div>
 </section>

@@ -10,7 +10,7 @@
   function ResponseController($scope) {
     var vm = this;
 
-    // Respond controller logic
+    // Response controller logic
     // ...
 
     init();

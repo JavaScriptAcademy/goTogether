@@ -14,7 +14,6 @@ var express = require('express');
 var app = express();
 var ObjectId = require('mongoose').Types.ObjectId;
 var Activity = require('mongoose').model('Activity');
-// var User = require('mongoose').model('User');
 
 /**
  * Show the current Activity
@@ -23,19 +22,21 @@ exports.read = function(req, res) {
   //get data from parameter
   var email = req.param('email');
   var activityId = req.param('activityId');
-  var activity = req.activity;
-
+  var isNew = false;
+  var isAccepted = false;
+  if(isParticipantNew(activityId, email)){
+    isNew = true;
+  }else{
+    if(isParticipantAccepted(activityId, email)){
+      isAccepted = true;
+    }
+  }
+  res.jsonp({
+    'isNew': isNew,
+    'isAccepted': isAccepted
+  });
   //send infomations to activity detail page
-  res.redirect('/activities/'+activityId+'/'+email);
 };
-
-// exports.test = function(req,res){
-//   var user = req.user;
-//   var activity = req.activity;
-//   // console.log(user);
-//   // console.log(activity);
-//   console.log(req.body);
-// };
 
 //when participant accept/reject invitation, move participant from pendding list to accpet/decline list
 exports.response = function(req,res){
@@ -43,15 +44,20 @@ exports.response = function(req,res){
   var activity = req.body;
   var response = req.param('response');
 
-  updateUserStatus(user,response);
-  var result = participantRespond(activity,user.email,response);
-
-  res.jsonp(activity);
+  participantRespond(activity, user.email, response);
+  // res.redirect('/activity/response');
 };
 
-function updateUserStatus(user,response){
-
-};
+function isParticipantNew(activityId, email){
+  Activity.findById(new ObjectId(activityId), function(err, activity){
+    return activity.pendingParticipants.indexOf(email) > 0;
+  });
+}
+function isParticipantAccepted(activityId, email){
+  Activity.findById(new ObjectId(activityId), function(err, activity){
+    return activity.acceptedParticipants.indexOf(email) > 0;
+  });
+}
 
 //move participant from pendding to decline according to response
 function participantRespond(activity, email, response, res){
