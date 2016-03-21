@@ -23,7 +23,6 @@ exports.renderServerError = function (req, res) {
  * Performs content-negotiation on the Accept HTTP header
  */
 exports.renderNotFound = function (req, res) {
-
   res.status(404).format({
     'text/html': function () {
       res.render('modules/core/server/views/404', {
@@ -40,3 +39,4 @@ exports.renderNotFound = function (req, res) {
     }
   });
 };
+

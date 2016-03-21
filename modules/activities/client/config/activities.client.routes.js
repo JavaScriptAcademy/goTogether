@@ -79,9 +79,34 @@
           pageTitle: 'Edit Activity {{ activityResolve.name }}'
         }
       })
+
       .state('activities.view', {
         url: '/:activityId',
         templateUrl: 'modules/activities/client/views/view-activity.client.view.html',
+        controller: 'ActivitiesController',
+        controllerAs: 'vm',
+        resolve: {
+          activityResolve: getActivity
+        },
+        data:{
+          pageTitle: 'Activity {{ articleResolve.name }}',
+        }
+      })
+      .state('activities.response', {
+        url: '/:activityId/:email',
+        templateUrl: 'modules/activities/client/views/view-activity.client.view.html',
+        controller: 'ActivitiesController',
+        controllerAs: 'vm',
+        resolve: {
+          activityResolve: getActivity
+        },
+        data:{
+          pageTitle: 'Activity {{ articleResolve.name }}'
+        }
+      })
+      .state('response', {
+        url: '/activity/response',
+        templateUrl: 'modules/activities/client/views/response.client.view.html',
         controller: 'ActivitiesController',
         controllerAs: 'vm',
         resolve: {
