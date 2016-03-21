@@ -51,9 +51,22 @@
           <h3><label class="control-label" for="pendingParticipants">Invited Friends</label></h3>
           <textarea name="pendingParticipants" type="text" ng-model="vm.activity.pendingParticipants" id="pendingParticipants" class="form-control" placeholder="Friends' Emails" required></textarea>
 
+
+          <!-- <select class="js-example-basic-multiple form-control" multiple="multiple">
+
+            <option value="AL">Alabama</option>
+            <option value="WY">Wyoming</option>
+            <option value="IL">ILLINOIS</option>
+            <option value="CA">CALIFORNIA</option>
+            <option value="WA">WASHINTON</option>
+          </select> -->
+
+
           <h3><label class="control-label" for="info">Info</label></h3>
           <input name="info" type="text" ng-model="vm.activity.activityInfo" id="info" class="form-control" placeholder="Activity Info">
         </div>
+
+
 
         <div class="form-group">
           <div class="col-md-3"></div>
@@ -75,3 +88,7 @@
     </form>
   </div>
 </section>
+
+<script type="text/javascript">
+  $(".js-example-basic-multiple").select2();
+</script>

@@ -18,6 +18,7 @@
     vm.remove = remove;
     vm.save = save;
 
+    console.log(Authentication.user);
     if($location.path().split('/')[3]){
       $scope.response = true;
     }else{
@@ -29,6 +30,7 @@
         vm.activity.$remove($state.go('activities.list'));
       }
     }
+
 
     // Save Activity
     function save(isValid) {
