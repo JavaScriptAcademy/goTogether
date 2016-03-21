@@ -41,16 +41,15 @@ exports.create = function(req, res) {
       mailgun.sendEmail(activity);
 
       var condition, update, options, callback;
+      options = {multi: false, upsert: true};
+      callback = function(err) {
+          console.log('cannot upsert the user with activityId: ' + err);
+      };
       //update participant's activity list
       activityResponse.pendingParticipants[0].split("; ").forEach(function(participantEmail) {
-          console.log(participantEmail);
-          condition = {'email': participantEmail};
-          update = {$push: {'activities': activityResponse._id}};
-          options = {multi: false, upsert: true};
-          callback = function(err) {
-            console.log('cannot upsert the user with activityId');
-          };
-          User.findOneAndUpdate(condition, update, options, callback);
+        condition = {'email': participantEmail, 'username': participantEmail};
+        update = {$push: {'activities': activityResponse._id}};
+        User.findOneAndUpdate(condition, update, options, callback);
       });
 
 
