@@ -5,9 +5,9 @@
     .module('users')
     .controller('IndividualController', IndividualController);
 
-  IndividualController.$inject = ['$scope', 'userResolve'];
+  IndividualController.$inject = ['$scope', 'userResolve', '$resource'];
 
-  function IndividualController($scope, user) {
+  function IndividualController($scope, user,$resource) {
     var vm = this;
 
     // Individual controller logic

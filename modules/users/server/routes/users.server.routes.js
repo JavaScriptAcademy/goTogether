@@ -13,7 +13,7 @@ module.exports = function (app) {
 
   app.route('/api/users/search/:email').get(users.search);
   app.route('/api/users/friends/:userId').get(users.finduser);
-  app.route('/api/users/friends').put(user.addfriend);
+  app.route('/api/users/friends').put(users.addfriend);
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
 };
