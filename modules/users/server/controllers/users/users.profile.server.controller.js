@@ -102,7 +102,7 @@ exports.search = function (req, res) {
 
   // {"name": /.*m.*/}
   // todo - look Regular Expression
-  User.find({ 'email': req.params.email }, function (err, data) {
+  User.find({ 'email': { $regex : req.params.email} }, function (err, data) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -132,41 +132,26 @@ exports.finduser = function (req, res) {
 
 };
 /**
- * Update user details
+ * add user's friend
  */
-exports.addfriend = function (req, res) {
+ exports.addfriend = function (req, res) {
   // Init Variables
   var user = req.user;
+  var friends = user.friends;
+  friends.push(req.body.userId);
 
-  // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
+  User.findOneAndUpdate({'_id' :user._id }, {'friends': friends}, function(err){
+    if(err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else{
 
-  if (user) {
-    // Merge existing user
-    user = _.extend(user, req.body);
-    user.updated = Date.now();
-    user.displayName = user.firstName + ' ' + user.lastName;
+      res.json(user);
 
-    user.save(function (err) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        req.login(user, function (err) {
-          if (err) {
-            res.status(400).send(err);
-          } else {
-            res.json(user);
-          }
-        });
-      }
-    });
-  } else {
-    res.status(400).send({
-      message: 'User is not signed in'
-    });
-  }
+    }
+
+  });
 };
 /**
  * Send User
