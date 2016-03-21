@@ -124,24 +124,25 @@ a:hover .header-profile-image {
   margin-top:0px !important;
 }
 .searchbar .results {
-    position: absolute;
-    top: 35px;
-    width: 300px;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    padding: 0;
-    margin: 0;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #cbcfe2 #c8cee7 #c4c7d7;
-    border-radius: 3px;
-    background-color: white;
-    opacity: 0.8;
+  position: absolute;
+  top: 35px;
+  width: 200px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcfe2 #c8cee7 #c4c7d7;
+  border-radius: 3px;
+  background-color: white;
+  opacity: 0.8;
 
 }
 .searchbar .results li{
   width:100%;
+  font-size:1.0em;
 }
 .searchbar .results li:hover{
 
