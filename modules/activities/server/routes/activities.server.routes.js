@@ -13,14 +13,13 @@ module.exports = function(app) {
     .get(activities.list)
     .post(activities.create);
 
-  app.route('/api/activities/invitation/:activityId/:email').all(activitiesPolicy.isAllowed)
+  app.route('/api/activities/invitation/:activityId/:email').all()//activitiesPolicy.isAllowed
     .get(invitation.read);
 
   app.route('/api/activities/:activityId').all(activitiesPolicy.isAllowed)
     .get(activities.read)
     .put(activities.update)
     .delete(activities.delete);
-
 
   // Finish by binding the Activity middleware
   app.param('activityId', activities.activityByID);
