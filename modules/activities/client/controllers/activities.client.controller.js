@@ -6,9 +6,9 @@
     .module('activities')
     .controller('ActivitiesController', ActivitiesController);
 
-  ActivitiesController.$inject = ['$scope', '$state', 'Authentication', 'activityResolve', '$location'];
+  ActivitiesController.$inject = ['$scope', '$state', '$http','Authentication', 'activityResolve', '$location'];
 
-  function ActivitiesController ($scope, $state, Authentication, activity, $location) {
+  function ActivitiesController ($scope, $state, $http, Authentication, activity, $location) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -17,6 +17,8 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    vm.acceptActivity = acceptActivity;
+    vm.rejectActivity = rejectActivity;
 
     if($location.path().split('/')[3]){
       $scope.response = true;
@@ -53,6 +55,32 @@
       function errorCallback(res) {
         vm.error = res.data.message;
       }
+    }
+
+    /*
+    * Added by Cyrus 2016.3.20
+    */
+    //participant accpet activity
+
+    function acceptActivity(){
+      console.log('participant accept the activity');
+
+      $http.post('/api/activities/invitation/true',vm.activity)
+      .success(function(res){
+        console.log('success proceed user accept activity');
+        $state.go('response', {
+        activityId: res._id
+        });
+      })
+      .error(function(err){
+        console.log('fail proceed user accept activity');
+        $scope.error = err.message;
+      });
+    }
+
+    //participant reject activity
+    function rejectActivity(){
+      console.log('participant reject the activity');
     }
   }
 })();
