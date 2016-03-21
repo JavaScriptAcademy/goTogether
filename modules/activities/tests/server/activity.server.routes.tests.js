@@ -79,7 +79,7 @@ describe('Activity CRUD tests', function () {
 
             // Get a list of Activities
             agent.get('/api/activities')
-              .end(function (activitysGetErr, activitysGetRes) {
+              .end(function (activitysGetErr, activitiesGetRes) {
                 // Handle Activity save error
                 if (activitysGetErr) {
                   return done(activitysGetErr);

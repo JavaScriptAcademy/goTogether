@@ -96,13 +96,31 @@ exports.changeProfilePicture = function (req, res) {
 };
 
 /**
- * Update user details
+ * search users
  */
 exports.search = function (req, res) {
 
   // {"name": /.*m.*/}
   // todo - look Regular Expression
-  User.find({ 'email': req.params.email }, function (err, data) {
+  User.find({ 'email': { $regex : req.params.email} }, function (err, data) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // todo change the below
+
+      res.json(data);
+    }
+  });
+
+};
+/**
+ * find user by id
+ */
+exports.finduser = function (req, res) {
+
+  User.findOne({ '_id': req.params.userId }, function (err, data) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -114,7 +132,28 @@ exports.search = function (req, res) {
   });
 
 };
+/**
+ * add user's friend
+ */
+ exports.addfriend = function (req, res) {
+  // Init Variables
+  var user = req.user;
+  var friends = user.friends;
+  friends.push(req.body.userId);
 
+  User.findOneAndUpdate({'_id' :user._id }, {'friends': friends}, function(err){
+    if(err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else{
+
+      res.json(user);
+
+    }
+
+  });
+};
 /**
  * Send User
  */

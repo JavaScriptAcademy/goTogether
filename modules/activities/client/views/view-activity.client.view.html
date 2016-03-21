@@ -64,35 +64,7 @@
  </div>
 </div>
 <div ng-show='response'>
-  <button type="button" class='btn btn-success'>Accept</button>
-  <button type="button" class='btn col-md-offset-1 btn-warning'>Reject</button>
+  <a class="btn btn-success" ng-hide='isAccepted' data-ng-click="vm.acceptActivity()">Accept</a>
+  <a class="btn btn-warning" ng-hide='isDeclined' data-ng-click="vm.rejectActivity()">Reject</a>
 </div>
 </section>
-
-<!-- <section>
-  <div class="page-header">
-    <h1 data-ng-bind="vm.activity.name"></h1>
-  </div>
-  <div class="pull-right"
-       data-ng-show="vm.activity.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       data-ui-sref="activities.edit({ activityId: vm.activity._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" data-ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.activity.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.activity.user"
-            data-ng-bind="vm.activity.user.displayName"></span>
-      <span data-ng-if="!vm.activity.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" data-ng-bind="vm.activity.content"></p>
-</section>
- -->

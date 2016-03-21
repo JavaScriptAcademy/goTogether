@@ -13,6 +13,9 @@ module.exports = function(app) {
     .get(activities.list)
     .post(activities.create);
 
+  app.route('/api/activities/invitation/:response').all()
+    .post(invitation.response);
+
   app.route('/api/activities/invitation/:activityId/:email').all()//activitiesPolicy.isAllowed
     .get(invitation.read);
 

@@ -7,6 +7,8 @@ var path = require('path'),
   mongoose = require('mongoose'),
 
   Activity = require('../models/activity.server.model.js'),
+  //User = require('../../../users/server/models/user.server.model.js'),
+  User = mongoose.model('User'),
 
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
@@ -29,19 +31,38 @@ exports.create = function(req, res) {
 // --------------------------------
 //  edit the activity pendingPaticipents format from string to array
 // -----------------------------------
-activity.save(function(err) {
-  if (err) {
+  activity.save(function(err, activityResponse) {
+    if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-       //-------------------------------
- // invoke the function to send the email
- //..........................
+      //send email to the participant
       mailgun.sendEmail(activity);
-      res.jsonp(activity);
+
+      var condition, update, options, callback;
+      options = {multi: false, upsert: true};
+      callback = function(err) {
+          console.log('cannot upsert the user with activityId: ' + err);
+      };
+      //update participant's activity list
+      activityResponse.pendingParticipants[0].split("; ").forEach(function(participantEmail) {
+        condition = {'email': participantEmail, 'username': participantEmail};
+        update = {$push: {'activities': activityResponse._id}};
+        User.findOneAndUpdate(condition, update, options, callback);
+      });
+
+
+      //update organizer's activity list
+      condition = {'email': activity.user.email};
+      User.update(condition, update, options, callback);
+
     }
-  });
+
+      res.jsonp(activity);
+
+});
+
 };
 
 /**

@@ -12,6 +12,11 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     if ($scope.authentication.user) {
       $location.path('/');
     }
+    $scope.copyEmail = function (){
+
+      $scope.credentials.username = $scope.credentials.email;
+
+    };
 
     $scope.signup = function (isValid) {
       $scope.error = null;
@@ -21,6 +26,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         return false;
       }
+
 
       $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
         // If successful we assign the response to the global user model
