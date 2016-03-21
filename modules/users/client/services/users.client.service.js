@@ -23,3 +23,12 @@ angular.module('users.admin').factory('Admin', ['$resource',
     });
   }
 ]);
+
+// Users service used for communicating with the users REST endpoint
+angular.module('users').factory('SearchUser', ['$resource',
+  function ($resource) {
+    return $resource('api/users/friends/:userId', {
+      userId: '@_id'
+    });
+  }
+]);

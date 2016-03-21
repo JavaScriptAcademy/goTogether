@@ -86,7 +86,7 @@ a:hover .header-profile-image {
   background-size:cover;
 }
 .sb-page-header .container p{
-  margin-top:30%;
+  margin-top:30% !important;
   text-align: center;
   color:white;
   font-size:5em;
@@ -102,14 +102,56 @@ a:hover .header-profile-image {
   color:white !important;
 }
 .dropdown-menu > li > a{
+
   color:#333 !important;
 }
-.searchbar div{
-  margin-top:6px;
+.searchbar .input-group *{
+  margin-top:12px;
   display:inline-block;
 }
-.searchbar div input{
-  width:60% !important;
+.searchbar .input-group input{
+
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  border-color: #a8acbc #babdcc #c0c3d2;
+
+}
+.ng-scope{
+  margin-top:0px !important;
+}
+.ng-scope p{
+  margin-top:0px !important;
+}
+.searchbar .results {
+  position: absolute;
+  top: 35px;
+  width: 200px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cbcfe2 #c8cee7 #c4c7d7;
+  border-radius: 3px;
+  background-color: white;
+  opacity: 0.8;
+
+}
+.searchbar .results li{
+  width:100%;
+  font-size:1.0em;
+}
+.searchbar .results li:hover{
+
+  background-color: rgba(100,100,100,0.5);
+  cursor: pointer;
+
+}
+.searchbar .results span{
+  padding-left: 7px;
 }
 @font-face{
   font-family:"Oswald-Light-Italic";

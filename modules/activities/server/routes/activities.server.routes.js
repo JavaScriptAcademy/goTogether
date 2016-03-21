@@ -4,13 +4,17 @@
  * Module dependencies
  */
 var activitiesPolicy = require('../policies/activities.server.policy'),
-  activities = require('../controllers/activities.server.controller');
+  activities = require('../controllers/activities.server.controller'),
+  invitation = require('../controllers/activities.invitation.server.controller');
 
 module.exports = function(app) {
   // Activities Routes
   app.route('/api/activities').all(activitiesPolicy.isAllowed)
     .get(activities.list)
     .post(activities.create);
+
+  app.route('/api/activities/invitation/:activityId/:email').all()//activitiesPolicy.isAllowed
+    .get(invitation.read);
 
   app.route('/api/activities/:activityId').all(activitiesPolicy.isAllowed)
     .get(activities.read)

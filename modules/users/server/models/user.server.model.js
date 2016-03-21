@@ -97,7 +97,18 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  friends:[{
+    type:String
+  }],
+  activities:[{
+    type:String
+  }],
+  active: {
+    type: Boolean,
+    default: false
   }
+
 });
 
 /**

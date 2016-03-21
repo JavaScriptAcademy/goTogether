@@ -6,9 +6,9 @@
     .module('activities')
     .controller('ActivitiesController', ActivitiesController);
 
-  ActivitiesController.$inject = ['$scope', '$state', 'Authentication', 'activityResolve'];
+  ActivitiesController.$inject = ['$scope', '$state', 'Authentication', 'activityResolve', '$location'];
 
-  function ActivitiesController ($scope, $state, Authentication, activity) {
+  function ActivitiesController ($scope, $state, Authentication, activity, $location) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -18,6 +18,11 @@
     vm.remove = remove;
     vm.save = save;
 
+    if($location.path().split('/')[3]){
+      $scope.response = true;
+    }else{
+      $scope.response = false;
+    }
     // Remove existing Activity
     function remove() {
       if (confirm('Are you sure you want to delete?')) {

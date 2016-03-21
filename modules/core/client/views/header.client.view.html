@@ -9,7 +9,7 @@
     <a ui-sref="home" class="navbar-brand">GoTogether</a>
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-    <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
+    <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);" ng-show="authentication.user">
       <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
         <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
         <ul ng-switch-when="dropdown" class="dropdown-menu">
@@ -56,8 +56,16 @@
       </li>
       <li class='searchbar'>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search Users">
-          <button class="btn btn-secondary" ng-click='search()'>Search</button>
+          <input type="text" ng-model="email" placeholder="  Search Users..." ng-keyup='listAll()'>
+           <ul class="results" ng-show='userlist'>
+              <li ng-repeat='user in users'>
+                <p ng-click='goToUserPage(user._id)'>
+                  <strong>
+                      <span>{{user.username}}</span>
+                  </strong>
+                </p>
+              </li>
+           </ul>
         </div>
       </li>
     </ul>
