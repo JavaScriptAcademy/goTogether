@@ -28,6 +28,19 @@
 <hr><br><br><br>
 
 <div class="form-group">
+  <div ng-show='!isNew'>
+   <div ng-show = '!isAccepted'>
+      <p class="control-label label-warning" > You have already reject this invitation.
+      If you want to change, please click the button at the bottom.</p>
+    </div>
+    <div ng-show = 'isAccepted'>
+      <p class="control-label label-warning" > You have already accept this invitation.
+      If you want to change, please click the button at the bottom.</p>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
  <label class="col-sm-2 control-label">StartDate:</label>
  <div class="col-sm-3">
    <!-- <input type="text" ng-disabled="!edit"> -->
@@ -64,7 +77,17 @@
  </div>
 </div>
 <div ng-show='response'>
-  <a class="btn btn-success" ng-hide='isAccepted' data-ng-click="vm.acceptActivity()">Accept</a>
-  <a class="btn btn-warning" ng-hide='isDeclined' data-ng-click="vm.rejectActivity()">Reject</a>
+  <div ng-show='isNew'>
+    <a class="btn btn-success" data-ng-click="vm.acceptActivity()">Accept</a>
+    <a class="btn btn-warning" data-ng-click="vm.rejectActivity()">Reject</a>
+  </div>
+  <div ng-show='!isNew'>
+   <div ng-show = '!isAccepted'>
+      <a class="btn btn-warning" data-ng-click="vm.rejectActivity()">Accept1</a>
+    </div>
+    <div ng-show = 'isAccepted'>
+    <a class="btn btn-success"  data-ng-click="vm.acceptActivity()">Reject1</a>
+    </div>
+  </div>
 </div>
 </section>

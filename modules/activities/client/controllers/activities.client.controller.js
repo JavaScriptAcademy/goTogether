@@ -25,6 +25,8 @@
       var email = $location.path().split('/')[3];
       var activityId = $location.path().split('/')[2];
       getActivityParticipantStatus(activityId, email);
+      $scope.isNew = false;
+      $scope.isAccepted = false;
     } else {
       $scope.response = false;
     }
@@ -64,8 +66,8 @@
       $http.get('/api/activities/invitation/' + activityId + '/' + email)
       .success(function(data){
         console.log(data);
-        $scope.isNew = data.isNew;
-        $scope.isAccepted = data.isAccepted;
+        // $scope.isNew = data.isNew;
+        // $scope.isAccepted = data.isAccepted;
       })
       .error(function(err){
         console.log(err);
