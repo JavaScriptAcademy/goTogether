@@ -25,6 +25,7 @@
     if ($location.path().split('/')[3]) {
       $scope.response = true;
       getActivityParticipantStatus(activityId, email);
+      autoSignout(Authentication.user,email);
     } else {
       $scope.response = false;
     }
@@ -86,21 +87,33 @@
         // alert('Success in accepting activity');
         window.location.reload();
       }, function errorCallback(response) {
-        alert('Delete friend error!');
+        alert('Accept activity error!');
       });
     }
 
     //participant reject activity
     function rejectActivity() {
       $http({
-      method: 'post',
-      url: '/api/activities/invitation/'+activityId+'/'+email+'/false'
+        method: 'post',
+        url: '/api/activities/invitation/'+activityId+'/'+email+'/false'
       }).then(function successCallback(response) {
-        // alert('Success in rejecting activity');
         window.location.reload();
       }, function errorCallback(response) {
-        alert('Delete friend error!');
+        alert('Reject activity error!');
       });
+    }
+
+    function autoSignout(user,email){
+      if(user != null&&user.email !== email){
+        $http({
+          method: 'get',
+          url: 'api/auth/signout'
+        }).then(function successCallback(res) {
+          console.log('succeed in signning out');
+        }, function errorCallback(res){
+          console.log('error in signning out')
+        })
+      }
     }
   }
 })();
