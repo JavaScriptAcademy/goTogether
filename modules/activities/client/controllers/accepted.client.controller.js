@@ -18,10 +18,11 @@
         }).then(function successCallback(response) {
 
           $scope.activities = response.data;
+          console.log(response.data);
 
         }, function errorCallback(response) {
 
-          console.log("get friends info error");
+          console.log("get accepted activities info error");
 
         });
 

@@ -5,7 +5,7 @@
     .module('activities')
     .controller('DeclinedController', DeclinedController);
 
-  DeclinedController.$inject = ['$scope', $http];
+  DeclinedController.$inject = ['$scope', '$http'];
 
   function DeclinedController($scope, $http) {
     var vm = this;
@@ -19,7 +19,7 @@
 
         }, function errorCallback(response) {
 
-          console.log("get friends info error");
+          console.log("get declined activities info error");
 
         });
 
