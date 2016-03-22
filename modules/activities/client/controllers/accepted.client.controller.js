@@ -10,6 +10,7 @@
   function AcceptedController($scope, $state, $http, Authentication, $location) {
     var vm = this;
 
+
     vm.authentication = Authentication;
 
     $http({
@@ -26,9 +27,7 @@
 
         });
 
-    init();
 
-    function init() {
-    }
-  }
+
+ }
 })();

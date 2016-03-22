@@ -19,6 +19,11 @@ module.exports = function(app) {
   app.route('/api/activities/invitation/:activityId/:email').all()//activitiesPolicy.isAllowed
     .get(invitation.read);
 
+  app.route('/api/activities/getUsersByStatus').post(activities.listByStatus);
+
+  app.route('/api/activities/getUserFriends').post(activities.getUserFriends);
+
+
   app.route('/api/activities/:activityId').all(activitiesPolicy.isAllowed)
     .get(activities.read)
     .put(activities.update)

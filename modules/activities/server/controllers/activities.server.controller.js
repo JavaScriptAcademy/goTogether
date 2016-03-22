@@ -128,6 +128,24 @@ exports.list = function(req, res) {
   });
 };
 
+exports.listByStatus = function(req, res) {
+
+  var participants = req.body.participants;
+
+  User.find({ email: { $in: participants }}, {password:0, salt:0}).exec(function(err, users) {
+    res.jsonp(users);
+  });
+};
+
+
+exports.getUserFriends = function(req, res) {
+
+  var friends = req.body.friends;
+
+  User.find({ _id: { $in: friends }}, {password:0, salt:0}).exec(function(err, users) {
+    res.jsonp(users);
+  });
+};
 /**
  * Activity middleware
  */

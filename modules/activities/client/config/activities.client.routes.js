@@ -83,7 +83,7 @@
       .state('activities.view', {
         url: '/:activityId',
         templateUrl: 'modules/activities/client/views/view-activity.client.view.html',
-        controller: 'ActivitiesController',
+        controller: 'ViewActivityController',
         controllerAs: 'vm',
         resolve: {
           activityResolve: getActivity
