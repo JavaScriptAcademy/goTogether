@@ -25,69 +25,70 @@
 </big>
 <p class="lead" data-ng-bind="vm.activity.content"></p>
 <br>
-<hr><br><br><br>
-
-<div class="form-group">
-  <div ng-show='!isNew'>
+<hr>
+<div class="form-group" ng-show='response'>
+  <div ng-show='!isPending'>
    <div ng-show = '!isAccepted'>
-      <p class="control-label label-warning" > You have already reject this invitation.
+    <p class="control-label label-warning" > You have already reject this invitation.
       If you want to change, please click the button at the bottom.</p>
     </div>
     <div ng-show = 'isAccepted'>
       <p class="control-label label-warning" > You have already accept this invitation.
-      If you want to change, please click the button at the bottom.</p>
+        If you want to change, please click the button at the bottom.</p>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="form-group">
- <label class="col-sm-2 control-label">StartDate:</label>
- <div class="col-sm-3">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
+  <div class="form-group">
+   <label class="col-sm-2 control-label">StartDate:</label>
+   <div class="col-sm-3">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
+   </div>
+   <label class="col-sm-2 control-label">StartTime:</label>
+   <div class="col-sm-4">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
+   </div>
  </div>
- <label class="col-sm-2 control-label">StartTime:</label>
- <div class="col-sm-4">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
- </div>
-</div>
-<div class="clear"></div> <br><br>
+ <div class="clear"></div> <br><br>
 
-<div class="form-group">
- <label class="col-sm-2 control-label">EndDate:</label>
- <div class="col-sm-3">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
+ <div class="form-group">
+   <label class="col-sm-2 control-label">EndDate:</label>
+   <div class="col-sm-3">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
+   </div>
+   <label class="col-sm-2 control-label">EndTime:</label>
+   <div class="col-sm-4">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.endTime | date:'shortTime'"></span>
+   </div>
  </div>
- <label class="col-sm-2 control-label">EndTime:</label>
- <div class="col-sm-4">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.endTime | date:'shortTime'"></span>
- </div>
-</div>
-<div class="clear"></div> <br><br>
+ <div class="clear"></div> <br><br>
 
 
-<div class="form-group">
- <label class="col-sm-2 control-label">Participant:</label>
- <div class="col-sm-3">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.pendingParticipants"></span>
+ <div class="form-group">
+   <label class="col-sm-2 control-label">Participant:</label>
+   <div class="col-sm-3">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.pendingParticipants"></span>
+   </div>
  </div>
-</div>
-<div ng-show='response'>
-  <div ng-show='isNew'>
+
+ <div class="clear"></div> <br>
+ <div class="form-group" ng-show='response'>
+  <div ng-show='isPending' class="col-sm-offset-4">
     <a class="btn btn-success" data-ng-click="vm.acceptActivity()">Accept</a>
-    <a class="btn btn-warning" data-ng-click="vm.rejectActivity()">Reject</a>
+    <a class="btn btn-warning col-sm-offset-1" data-ng-click="vm.rejectActivity()">Reject</a>
   </div>
-  <div ng-show='!isNew'>
-   <div ng-show = '!isAccepted'>
-      <a class="btn btn-warning" data-ng-click="vm.rejectActivity()">Accept1</a>
-    </div>
-    <div ng-show = 'isAccepted'>
-    <a class="btn btn-success"  data-ng-click="vm.acceptActivity()">Reject1</a>
-    </div>
+  <div ng-show='!isPending'>
+   <div ng-show = '!isAccepted' class="col-sm-offset-5">
+    <a class="btn btn-warning" data-ng-click="vm.acceptActivity()">Accept1</a>
   </div>
+  <div ng-show = 'isAccepted' class="col-sm-offset-5">
+    <a class="btn btn-success"  data-ng-click="vm.rejectActivity()">Reject1</a>
+  </div>
+</div>
 </div>
 </section>
