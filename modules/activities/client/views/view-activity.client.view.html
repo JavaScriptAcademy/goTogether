@@ -40,13 +40,15 @@
   </div>
 
   <div class="form-group">
+     <div class="col-md-2"></div>
+
    <label class="col-sm-2 control-label">StartDate:</label>
    <div class="col-sm-3">
      <!-- <input type="text" ng-disabled="!edit"> -->
      <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
    </div>
    <label class="col-sm-2 control-label">StartTime:</label>
-   <div class="col-sm-4">
+   <div class="col-sm-2">
      <!-- <input type="text" ng-disabled="!edit"> -->
      <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
    </div>
@@ -54,63 +56,21 @@
  <div class="clear"></div> <br><br>
 
  <div class="form-group">
+     <div class="col-md-2"></div>
+
    <label class="col-sm-2 control-label">EndDate:</label>
    <div class="col-sm-3">
      <!-- <input type="text" ng-disabled="!edit"> -->
      <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
    </div>
    <label class="col-sm-2 control-label">EndTime:</label>
-   <div class="col-sm-4">
+   <div class="col-sm-2">
      <!-- <input type="text" ng-disabled="!edit"> -->
      <span data-ng-bind="vm.activity.endTime | date:'shortTime'"></span>
    </div>
  </div>
  <div class="clear"></div> <br><br>
 
-   <big>
-     <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.activity.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.activity.user"
-      data-ng-bind="vm.activity.user.displayName"></span>
-      <span data-ng-if="!vm.activity.user">Deleted User</span>
-   </em>
-   </big>
-   <p class="lead" data-ng-bind="vm.activity.content"></p>
-   <br>
-   <hr><br><br><br>
-
-   <div class="form-group">
-     <div class="col-md-2"></div>
-     <label class="col-sm-2 control-label">StartDate:</label>
-     <div class="col-sm-2">
-      <!-- <input type="text" ng-disabled="!edit"> -->
-         <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
-     </div>
-      <label class="col-sm-2 control-label">StartTime:</label>
-      <div class="col-sm-4">
-         <!-- <input type="text" ng-disabled="!edit"> -->
-         <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
-      </div>
-   </div>
-
-   <div class="clear"></div> <br><br>
-
-   <div class="form-group">
-     <div class="col-md-2"></div>
-     <label class="col-sm-2 control-label">EndDate:</label>
-     <div class="col-sm-2">
-      <!-- <input type="text" ng-disabled="!edit"> -->
-         <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
-      </div>
-      <label class="col-sm-2 control-label">EndTime:</label>
-      <div class="col-sm-4">
-         <!-- <input type="text" ng-disabled="!edit"> -->
-         <span data-ng-bind="vm.activity.endTime | date:'shortTime'"></span>
-      </div>
-   </div>
-   <div class="clear"></div> <br><br>
 
    <div class="form-group">
      <div class="col-md-2"></div>
@@ -147,14 +107,6 @@
       </div>
     </div>
    </div>
-
- <div class="form-group">
-   <label class="col-sm-2 control-label">Participant:</label>
-   <div class="col-sm-3">
-     <!-- <input type="text" ng-disabled="!edit"> -->
-     <span data-ng-bind="vm.activity.pendingParticipants"></span>
-   </div>
- </div>
 
  <div class="clear"></div> <br>
  <div class="form-group" ng-show='response'>
