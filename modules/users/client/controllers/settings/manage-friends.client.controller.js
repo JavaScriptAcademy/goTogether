@@ -27,20 +27,23 @@
 
     $scope.deletFriend=function(userId, userDisplayName){
       goToUPflag=false;
-      var friendsList= Authentication.user.friends;
-      friendsList.splice(friendsList.indexOf(userId),1);
-      $http({
-        method: 'PUT',
-        url: '/api/users/friends/',
-        data: { user : Authentication.user }
-      }).then(function successCallback(response) {
-       alert('Delete friend: '+userDisplayName+'sucessfully!');
-       window.location.reload();
-     }, function errorCallback(response) {
+      if (window.confirm('Are you sure you want to delete friend: '+userDisplayName+'?')){
+        var friendsList= Authentication.user.friends;
+        friendsList.splice(friendsList.indexOf(userId),1);
+        $http({
+          method: 'PUT',
+          url: '/api/users/friends/',
+          data: { user : Authentication.user }
+        }).then(function successCallback(response) {
 
-       alert('Delete friend error!');
+         window.location.reload();
+       }, function errorCallback(response) {
 
-     });
+         alert('Delete friend error!');
+
+       });
+      };
+
     };
     init();
 

@@ -51,16 +51,7 @@
     };
 
     $scope.goHomePage = function(){
-
-      // if(history.length === 1){
-      //   $location.url('/');
-      // }else{
-      //   history.back();
-      // }
       history.back();
-
-
-
     };
 
     init();
