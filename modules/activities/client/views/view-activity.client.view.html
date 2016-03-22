@@ -74,16 +74,23 @@
      <label class="col-md-2 control-label">Participant:</label>
      <div class="col-md-3">
        <div ng-repeat="accepted in vm.acceptedParticipants">
+         <h1>
          <a ng-if="accepted.displayName !== undefined" href="/users/{{accepted._id}}" style="color: #04B404">{{accepted.displayName}}</a>
-         <span ng-if="accepted.displayName === undefined" style="color: #04B404">{{accepted.email}}</span>
+         <span ng-if="accepted.displayName === undefined" style="color: #04B404">{{accepted.email}}</span></h1>
+
       </div>
       <div ng-repeat="pending in vm.pendingParticipants">
-         <a ng-if="pending.displayName !== undefined" href="/users/{{pending._id}}" style="color: grey">{{pending.displayName}}</a>
-         <span ng-if="pending.displayName === undefined" style="color: grey">{{pending.email}}</span>
+         <h1>
+           <a ng-if="pending.displayName !== undefined" href="/users/{{pending._id}}" style="color: grey">{{pending.displayName}}</a>
+           <span ng-if="pending.displayName === undefined" style="color: grey">{{pending.email}}</span>
+         </h1>
       </div>
       <div ng-repeat="declined in vm.declinedParticipants">
-         <a ng-if="declined.displayName !== undefined" href="/users/{{declined._id}}" style="color: red">{{declined.displayName}}</a>
-         <span ng-if="declined.displayName === undefined" style="color: red">{{declined.email}}</span>
+         <h1>
+           <a ng-if="declined.displayName !== undefined" href="/users/{{declined._id}}" style="color: red">{{declined.displayName}}</a>
+           <span ng-if="declined.displayName === undefined" style="color: red">{{declined.email}}</span>
+         </h1>
+
       </div>
     </div>
    </div>

@@ -20,62 +20,18 @@
     vm.acceptActivity = acceptActivity;
     vm.rejectActivity = rejectActivity;
 
-    var pending = [];
-    var accepted = [];
-    var declined = [];
-// get pending user objects
-    for(var index = 0; index < vm.activity.pendingParticipants.length; index++ ){
-      $http.get('/api/users/search/' + vm.activity.pendingParticipants[index])
-      .success(function(data){
-        pending.push(data[0]);
-        vm.pendingParticipants = pending;
-      })
-      .error(function(err){
-        console.log(err);
-      });
-    }
-// get accepted user objects
-    for(var index = 0; index < vm.activity.acceptedParticipants.length; index++ ){
-      $http.get('/api/users/search/' + vm.activity.acceptedParticipants[index])
-      .success(function(data){
-        accepted.push(data[0]);
-        console.log(data[0].displayName);
-        vm.acceptedParticipants = accepted;
-      })
-      .error(function(err){
-        console.log(err);
-      });
-    }
-// get declined user objects
-    for(var index = 0; index < vm.activity.declinedParticipants.length; index++ ){
-      $http.get('/api/users/search/' + vm.activity.declinedParticipants[index])
-      .success(function(data){
-        declined.push(data[0]);
-        vm.declinedParticipants = declined;
-      })
-      .error(function(err){
-        console.log(err);
-      });
-    }
-
-
 
 // Get the friends as user object
-    var friendsID = Authentication.user.friends;
-    var friends = [];
-
-    for(var friendID of friendsID){
-      $http({
-       method: 'GET',
-       url: '/api/users/friends/' + friendID
-     }).then(function successCallback(response) {
-
-       friends.push(response.data);
-       vm.friends = friends;
-     }, function errorCallback(response) {
-       console.log("get friends info error");
-     });
-   }
+    $http({
+      url: '/api/activities/getUserFriends',
+      method: 'post',
+      data: {
+        friends: Authentication.user.friends
+      }
+    }).then(function(response) {
+      console.log(response.data);
+      vm.friends = response.data;
+    });
 
 
    if($location.path().split('/')[3]){
