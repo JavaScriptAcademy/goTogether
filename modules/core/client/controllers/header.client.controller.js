@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', '$http', 'Authentication', 'Menus', '$window',
-  function ($scope, $state, $http, Authentication, Menus, $window) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', '$http', 'Authentication', 'Menus', '$location',
+  function ($scope, $state, $http, Authentication, Menus, $location) {
     // Expose view variables
     $scope.$state = $state;
     $scope.authentication = Authentication;
@@ -59,7 +59,9 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
       }
     };
     $scope.goToUserPage = function (userId) {
-      $window.open('/users/' + userId);
+      $location.url('/users/' + userId);
+      $scope.email="";
+      $scope.userlist = false;
     };
   }
 ]);
