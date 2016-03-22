@@ -52,11 +52,9 @@ exports.create = function(req, res) {
         User.findOneAndUpdate(condition, update, options, callback);
       });
 
-
       //update organizer's activity list
       condition = {'email': activity.user.email};
       User.update(condition, update, options, callback);
-
     }
 
       res.jsonp(activity);
