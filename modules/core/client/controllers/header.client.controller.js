@@ -28,30 +28,30 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
       // example of $http below
       if($scope.email === ""){
 
-         $scope.userlist = false;
+        $scope.userlist = false;
 
       }else{
 
-          $http({
+        $http({
             method: 'GET',
             url: '/api/users/search/'+$scope.email
           }).then(function successCallback(response) {
 
-              if(response.data.length === 0) {
+            if(response.data.length === 0) {
 
-                 $scope.users = [{'username' : 'No User Found!', 'email' : 'Try Again...'}];
-                 $scope.userlist = true;
+                $scope.users = [{ 'username' : 'No User Found!', 'email' : 'Try Again...' }];
+                $scope.userlist = true;
 
               }else{
 
-                 $scope.users = response.data;
-                 $scope.userlist = true;
+                $scope.users = response.data;
+                $scope.userlist = true;
               }
 
 
               // this callback will be called asynchronously
               // when the response is available
-            }, function errorCallback(response) {
+          }, function errorCallback(response) {
 
               // called asynchronously if an error occurs
               // or server returns response with an error status.

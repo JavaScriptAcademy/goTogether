@@ -5,11 +5,13 @@
     .module('users')
     .controller('FriendsController', FriendsController);
 
-  FriendsController.$inject = ['$scope', '$resource', 'Authentication', '$location',  '$http'];
+  FriendsController.$inject = ['$scope', '$resource', 'Authentication', '$location', '$http'];
 
   function FriendsController($scope, $resource, Authentication, $location, $http) {
     var vm = this;
     $scope.showAFButton=true;
+    $scope.deleteButtonShow=false;
+    var goToUPflag=true;
 
     // Friends controller logic
     // ...
@@ -17,9 +19,29 @@
     $scope.friends = createFriendsList(friendsIdList);
 
     $scope.goToUserPage = function (userId) {
-      $location.url('/users/' + userId);
+      if(goToUPflag){
+        $location.url('/users/' + userId);
+      }else{goToUPflag=true;}
     };
 
+
+    $scope.deletFriend=function(userId, userDisplayName){
+      goToUPflag=false;
+      var friendsList= Authentication.user.friends;
+      friendsList.splice(friendsList.indexOf(userId),1);
+      $http({
+        method: 'PUT',
+        url: '/api/users/friends/',
+        data: { user : Authentication.user }
+      }).then(function successCallback(response) {
+       alert('Delete friend: '+userDisplayName+'sucessfully!');
+       window.location.reload();
+     }, function errorCallback(response) {
+
+       alert('Delete friend error!');
+
+     });
+    };
     init();
 
     function init() {
@@ -31,17 +53,17 @@
 
       friendsIdList.forEach(function(friend){
         $http({
-           method: 'GET',
-           url: '/api/users/friends/' + friend
-         }).then(function successCallback(response) {
+          method: 'GET',
+          url: '/api/users/friends/' + friend
+        }).then(function successCallback(response) {
 
-             list.push(response.data);
+           list.push(response.data);
 
-           }, function errorCallback(response) {
+         }, function errorCallback(response) {
 
-             console.log("get friends info error");
+             console.log('get friends info error');
 
-        });
+           });
 
       });
 

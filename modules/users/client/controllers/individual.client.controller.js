@@ -24,20 +24,27 @@
 
     $scope.addFriend = function(){
 
-      $http({
-            method: 'PUT',
-            url: '/api/users/friends',
-            data: {userId : user._id}
-          }).then(function successCallback(response) {
+      if(friends.includes(user._id)){
+        $scope.addFriendRepeatWarn=true;
+        return;
+      }
 
-               $scope.showAFButton=false;
-               $scope.addFriendSuccess=true;
+      friends.push(user._id);
+
+      $http({
+        method: 'PUT',
+        url: '/api/users/friends',
+        data: { user : Authentication.user }
+      }).then(function successCallback(response) {
+
+            $scope.showAFButton=false;
+            $scope.addFriendSuccess=true;
 
               // this callback will be called asynchronously
               // when the response is available
-            }, function errorCallback(response) {
+          }, function errorCallback(response) {
 
-                $scope.addFriendFail = true;
+              $scope.addFriendFail = true;
               // called asynchronously if an error occurs
               // or server returns response with an error status.
             });
