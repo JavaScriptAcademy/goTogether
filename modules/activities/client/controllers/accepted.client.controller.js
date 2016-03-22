@@ -5,12 +5,25 @@
   .module('activities')
   .controller('AcceptedController', AcceptedController);
 
-  AcceptedController.$inject = ['$scope'];
+  AcceptedController.$inject = ['$scope', '$state', '$http','Authentication', '$location'];
 
-  function AcceptedController($scope) {
+  function AcceptedController($scope, $state, $http, Authentication, $location) {
     var vm = this;
-    // Accepted controller logic
-    // ...
+
+    vm.authentication = Authentication;
+
+    $http({
+          method: 'GET',
+          url: '/api/accepted/activities'
+        }).then(function successCallback(response) {
+
+          $scope.activities = response.data;
+
+        }, function errorCallback(response) {
+
+          console.log("get friends info error");
+
+        });
 
     init();
 

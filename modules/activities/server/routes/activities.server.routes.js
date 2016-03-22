@@ -24,6 +24,8 @@ module.exports = function(app) {
     .put(activities.update)
     .delete(activities.delete);
 
+  app.route('/api/:option/activities').get(activities.optionlist);
+
   // Finish by binding the Activity middleware
   app.param('activityId', activities.activityByID);
 };
