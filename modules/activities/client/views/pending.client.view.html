@@ -3,56 +3,45 @@
     <h1>Activities</h1>
   </div>
   <ul id="myTab" class="nav nav-tabs">
+        <!-- <li>
+            <a href="/activities/upcoming" data-toggle="tab">Upcoming Activities</a>
+        </li> -->
         <li>
-            <a href="upcoming" data-toggle="tab">Upcoming Activities</a>
+            <a href="/activities/accepted" data-toggle="tab">Accepted Activities</a>
         </li>
         <li>
-            <a href="accepted" data-toggle="tab">Accepted Activities</a>
-        </li>
-        <li>
-            <a href="declined" data-toggle="tab">Declined Activities</a>
+            <a href="/activities/declined" data-toggle="tab">Declined Activities</a>
         </li>
         <li class="active">
-            <a href="pending" data-toggle="tab">Pending Activities</a>
+            <a href="/activities/pending" data-toggle="tab">Pending Activities</a>
         </li>
-        <li>
-            <a href="history" data-toggle="tab">History Activities</a>
-        </li>
+        <!-- <li>
+            <a href="/activities/history" data-toggle="tab">History Activities</a>
+        </li> -->
 
     </ul>
-    <table class="table table-bordered">
-                    <!-- On rows -->
-                    <tr class="info">
-                        <th>Activity Name</th>
-                        <th>Start Time</th>
-                        <th>Organiser</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr class="warning clickable-row"  data-href='/activities'>
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                    </tr>
-                    <tr class="warning">
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                    </tr>
-                    <tr class="warning">
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                    </tr>
-                    <tr class="warning">
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                        <td>pending</td>
-                    </tr>
-                </table>
+
+     <table class="table table-bordered">
+        <tr class="info">
+            <th>Activity Name</th>
+            <th>Start Time</th>
+            <th>Organiser</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat='activity in activities'>
+            <td>{{activity.activityName}}</td>
+            <td>{{activity.startTime}}</td>
+            <td>{{activity.user}}</td>
+            <td><a href='/activities/{{activity._id}}'>View</a></td>
+        </tr>
+
+    </table>
+
+      <!-- <div ng-repeat="activity in vm.activities">
+        {{activity}} -->
+
+      </div>
+
 
                 <a href="/activities"><button type="button" class="btn btn-default btn-lg">Back</button></a>
 </section>

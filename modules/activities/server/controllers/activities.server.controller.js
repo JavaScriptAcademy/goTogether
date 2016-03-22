@@ -169,5 +169,38 @@ exports.activityByID = function(req, res, next, id) {
     next();
   });
 };
+// get accepted activity list
+exports.optionlist = function(req, res){
+  var myemail = req.user.email;
+  var option = req.params.option;
+  option = option + "Participants";
 
+  var activitiesId = req.user.activities;
+  var results = getActivities(activitiesId, myemail, option, sendResponse);
+  //debugger;
+  function sendResponse(results) {
+      res.json(results);
+  }
 
+};
+
+function getActivities(activitiesId, myemail, option, callback){
+  var results = [];
+  var count = 0;
+  activitiesId.forEach(function(id){
+    count++;
+    Activity.findOne({'_id' : id}, function(err, activity){
+      if(err) throw err;
+      else{
+
+        if(activity[option].indexOf(myemail) !== -1){
+            results.push(activity);
+        }
+      }
+      if (count === activitiesId.length){
+        callback(results);
+      }
+    });
+
+  });
+}

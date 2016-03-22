@@ -19,6 +19,13 @@
     vm.save = save;
     vm.acceptActivity = acceptActivity;
     vm.rejectActivity = rejectActivity;
+    var activityId = $location.path().split('/')[2];
+    var email = $location.path().split('/')[3];
+
+    var friendsID = Authentication.user.friends;
+    vm.friends = getFriends(friendsID);
+
+
 
 
 // Get the friends as user object
@@ -34,14 +41,14 @@
     });
 
 
-   if($location.path().split('/')[3]){
-    $scope.response = true;
-    var email = $location.path().split('/')[3];
-    var activityId = $location.path().split('/')[2];
-    getActivityParticipantStatus(activityId, email);
-  } else {
-    $scope.response = false;
-  }
+
+    if ($location.path().split('/')[3]) {
+      $scope.response = true;
+      getActivityParticipantStatus(activityId, email);
+    } else {
+      $scope.response = false;
+    }
+
     // Remove existing Activity
     function remove() {
       if (confirm('Are you sure you want to delete?')) {
@@ -78,8 +85,9 @@
     function getActivityParticipantStatus(activityId, email) {
       $http.get('/api/activities/invitation/' + activityId + '/' + email)
       .success(function(data){
+        console.log('data');
         console.log(data);
-        $scope.isNew = data.isNew;
+        $scope.isPending = data.isPending;
         $scope.isAccepted = data.isAccepted;
       })
       .error(function(err){
@@ -93,24 +101,50 @@
     //participant accpet activity
 
     function acceptActivity(){
-      console.log('participant accept the activity');
 
-      $http.post('/api/activities/invitation/true',vm.activity)
-      .success(function(res){
-        console.log('success proceed user accept activity');
-        $state.go('response', {
-          activityId: res._id
-        });
-      })
-      .error(function(err){
-        console.log('fail proceed user accept activity');
-        $scope.error = err.message;
+    $http({
+      method: 'post',
+      url: '/api/activities/invitation/'+activityId+'/'+email+'/true'
+      }).then(function successCallback(response) {
+        // alert('Success in accepting activity');
+        window.location.reload();
+      }, function errorCallback(response) {
+        alert('Delete friend error!');
+
       });
     }
 
     //participant reject activity
-    function rejectActivity(){
-      console.log('participant reject the activity');
+    function rejectActivity() {
+      $http({
+      method: 'post',
+      url: '/api/activities/invitation/'+activityId+'/'+email+'/false'
+      }).then(function successCallback(response) {
+        // alert('Success in rejecting activity');
+        window.location.reload();
+      }, function errorCallback(response) {
+        alert('Delete friend error!');
+      });
+    }
+
+    function getFriends(friendsID){
+      var friends = [];
+      friendsID.forEach(function(friendID){
+
+        $http({
+        method: 'GET',
+        url: '/api/users/friends/' + friendID
+        }).then(function successCallback(response) {
+
+          friends.push(response.data);
+
+        }, function errorCallback(response) {
+
+          console.log("get friends info error");
+
+        });
+      });
+      return friends;
     }
   }
 })();

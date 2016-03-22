@@ -14,6 +14,8 @@ module.exports = function (app) {
   app.route('/api/users/search/:email').get(users.search);
   app.route('/api/users/friends/:userId').get(users.finduser);
   app.route('/api/users/friends').put(users.addfriend);
+  //add by fiona 0321
+  // app.route('/api/users/activities/:activityId').get(users.findactivity);
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
 };
