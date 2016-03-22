@@ -9,12 +9,8 @@
 
   function AcceptedController($scope) {
     var vm = this;
-    // Accepted controller logic
-    // ...
 
-    init();
 
-    function init() {
-    }
-  }
+
+ }
 })();
