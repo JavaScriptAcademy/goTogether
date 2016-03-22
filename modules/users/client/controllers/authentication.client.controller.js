@@ -52,8 +52,10 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
 
-        // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+        // And redirect to the previous or home
+
+        $state.go($state.previous.state.name || 'introduce', $state.previous.params);
+
       }).error(function (response) {
         $scope.error = response.message;
       });
