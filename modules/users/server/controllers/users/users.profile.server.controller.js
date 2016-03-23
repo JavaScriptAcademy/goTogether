@@ -139,19 +139,35 @@ exports.updateFriends = function (req, res) {
   // Init Variables
    var user = req.body.user;
    var friends = user.friends;
+   if(req.user.stage < 1){
+     User.findOneAndUpdate({ '_id' :user._id }, { 'friends': friends, 'stage' : 1 }, function(err){
+      if(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else{
 
-   User.findOneAndUpdate({ '_id' :user._id }, { 'friends': friends }, function(err){
-    if(err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else{
+        res.json(user);
 
-      res.json(user);
+      }
 
-    }
+    });
+  }else{
 
-  });
+    User.findOneAndUpdate({ '_id' : user._id }, { 'friends': friends }, function(err){
+      if(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else{
+
+        res.json(user);
+
+      }
+
+    });
+
+  }
  };
 /**
  * Send User

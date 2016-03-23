@@ -18,8 +18,10 @@
 
     }else if(user_stage == 1){
       document.getElementById('a2').click();
-    }else{
+    }else if(user_stage == 2){
       document.getElementById('a3').click();
+    }else{
+      document.getElementById('a4').click();
     }
     init();
 
