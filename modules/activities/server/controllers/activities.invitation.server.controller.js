@@ -14,6 +14,8 @@ var express = require('express');
 var app = express();
 var ObjectId = require('mongoose').Types.ObjectId;
 var Activity = require('mongoose').model('Activity');
+var User = require('mongoose').model('User');
+
 
 //whether an participant is new or has accepted the activity
 var isNew = false;
@@ -43,6 +45,15 @@ exports.read = function(req, res) {
 };
 
 exports.update = function(req, res) {
+
+  if(req.user){
+    if(req.user.stage < 2){
+      User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
+           if(err) throw err;
+      });
+    }
+  }
+
   var activityId = req.param('activityId');
   var email = req.param('email');
   var response = req.param('isAccept');
@@ -58,6 +69,7 @@ exports.update = function(req, res) {
       if (response === 'true'){
         addParticipantIntoList(activity.acceptedParticipants, email);
       }else{
+        //
         addParticipantIntoList(activity.declinedParticipants, email);
       }
       removeParticipantFromList(activity.pendingParticipants, email);
@@ -66,6 +78,7 @@ exports.update = function(req, res) {
         addParticipantIntoList(activity.acceptedParticipants, email);
         removeParticipantFromList(activity.declinedParticipants, email);
       } else {
+        //
         addParticipantIntoList(activity.declinedParticipants, email);
         removeParticipantFromList(activity.acceptedParticipants, email);
       }

@@ -5,8 +5,20 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     $scope.authentication = Authentication;
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
+
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
+    $scope.credentials = {};
+    var url_arr = $location.url().split("/");
+    if(url_arr[3] != undefined){
+
+        var email = url_arr[3];
+        $scope.checkEmail  = true;
+        $scope.credentials.email = email;
+        $scope.credentials.username = $scope.credentials.email
+    }else{
+       $scope.checkEmail  = false;
+    }
 
     // If user is signed in then redirect back home
     if ($scope.authentication.user) {
@@ -33,7 +45,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         $scope.authentication.user = response;
 
         // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+        $state.go('introduce', $state.previous.params);
       }).error(function (response) {
         $scope.error = response.message;
       });
@@ -52,8 +64,10 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
 
-        // And redirect to the previous or home page
-        $state.go($state.previous.state.name || 'home', $state.previous.params);
+        // And redirect to the previous or home
+
+        $state.go('introduce', $state.previous.params);
+
       }).error(function (response) {
         $scope.error = response.message;
       });

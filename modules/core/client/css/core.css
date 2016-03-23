@@ -157,6 +157,31 @@ a:hover .header-profile-image {
   width:125% !important;
   height:60px !important;
 }
+.deleteButton{
+
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
+  float: right;
+  margin-right: 20px;
+  visibility: hidden;
+}
+.table-bordered tr:hover .deleteButton{
+   visibility: visible;
+}
+.table-bordered tr:hover{
+  background-color: #C6EAD1;
+   visibility: visible;
+}
+.panel-default > .panel-heading {
+    background-image: -webkit-linear-gradient(top, #f5f5f5 0%, #e8e8e8 100%);
+    background-image: -o-linear-gradient(top, #f5f5f5 0%, #e8e8e8 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#e8e8e8));
+    background-image: linear-gradient(to bottom, rgb(121, 232, 121) 0%, rgba(255, 255, 255, .15) 100%);
+    background-repeat: repeat-x;
+}
 @font-face{
   font-family:"Oswald-Light-Italic";
   src:url("/fonts/Oswald-Light-Italic/Oswald-LightItalic.ttf");
