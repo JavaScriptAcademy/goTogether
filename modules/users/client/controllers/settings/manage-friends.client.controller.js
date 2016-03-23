@@ -21,7 +21,7 @@
     $scope.goToUserPage = function (userId) {
       if(goToUPflag){
         $location.url('/users/' + userId);
-      }else{goToUPflag=true;}
+      }
     };
 
 
@@ -42,7 +42,7 @@
          alert('Delete friend error!');
 
        });
-      };
+      }
 
     };
     init();

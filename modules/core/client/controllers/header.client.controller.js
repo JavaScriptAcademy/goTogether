@@ -8,13 +8,15 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
 
     // Get the topbar menu
     $scope.menu = Menus.getMenu('topbar');
-
     // Toggle the menu items
     $scope.isCollapsed = false;
     $scope.toggleCollapsibleMenu = function () {
       $scope.isCollapsed = !$scope.isCollapsed;
     };
 
+   var signup = document.getElementById('signup');
+   signup.setAttribute('ui-sref', 'authentication.signup');
+   signup.href = '/authentication/signup';
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
