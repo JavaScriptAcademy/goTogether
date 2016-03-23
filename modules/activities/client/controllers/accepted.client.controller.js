@@ -23,9 +23,16 @@
 
         }, function errorCallback(response) {
 
+
+          console.log("error "+ response.data);
+
+          $scope.activities = [];
+          console.log("length: "+$scope.activities.length);
+
           console.log("get accepted activities info error");
 
         });
+
 
 
 

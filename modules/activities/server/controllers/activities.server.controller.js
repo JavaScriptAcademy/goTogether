@@ -38,6 +38,11 @@ exports.create = function(req, res) {
       });
     } else {
       //send email to the participant
+      if(req.user.stage < 2){
+          User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
+            if(err) throw err;
+          });
+        }
       mailgun.sendEmail(activity);
 
       var condition, update, options, callback;
@@ -46,7 +51,7 @@ exports.create = function(req, res) {
           console.log('cannot upsert the user with activityId: ' + err);
       };
       //update participant's activity list
-      activityResponse.pendingParticipants[0].split("; ").forEach(function(participantEmail) {
+      activityResponse.pendingParticipants.forEach(function(participantEmail) {
         condition = {'email': participantEmail, 'username': participantEmail};
         update = {$push: {'activities': activityResponse._id}};
         User.findOneAndUpdate(condition, update, options, callback);

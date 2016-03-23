@@ -27,7 +27,7 @@ var formEmailBody = function(email,activity){
 module.exports.sendEmail = function(activity){
   var mailgun = new Mailgun({apiKey: config.mailgun.api_key, domain: config.mailgun.domain});
   //Invokes the method to send emails given the above data with the helper library
-  var participants = activity.pendingParticipants[0].split("; ");
+  var participants = activity.pendingParticipants;
   participants.forEach(function (participant) {
   var data = {
     //Specify email data
