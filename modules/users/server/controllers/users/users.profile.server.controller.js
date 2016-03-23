@@ -102,7 +102,7 @@ exports.search = function (req, res) {
 
   // {"name": /.*m.*/}
   // todo - look Regular Expression
-  User.find({ 'email': { $regex : req.params.email} }, function (err, data) {
+  User.find({ 'email': { $regex : req.params.email } }, function (err, data) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -153,25 +153,40 @@ exports.finduser = function (req, res) {
 /**
  * add user's friend
  */
- exports.addfriend = function (req, res) {
+exports.updateFriends = function (req, res) {
   // Init Variables
-  var user = req.user;
-  var friends = user.friends;
-  friends.push(req.body.userId);
+   var user = req.body.user;
+   var friends = user.friends;
+   if(req.user.stage < 1){
+     User.findOneAndUpdate({ '_id' :user._id }, { 'friends': friends, 'stage' : 1 }, function(err){
+      if(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else{
 
-  User.findOneAndUpdate({'_id' :user._id }, {'friends': friends}, function(err){
-    if(err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else{
+        res.json(user);
 
-      res.json(user);
+      }
 
-    }
+    });
+  }else{
 
-  });
-};
+    User.findOneAndUpdate({ '_id' : user._id }, { 'friends': friends }, function(err){
+      if(err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else{
+
+        res.json(user);
+
+      }
+
+    });
+
+  }
+ };
 /**
  * Send User
  */
