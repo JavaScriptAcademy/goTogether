@@ -29,7 +29,7 @@ exports.create = function(req, res) {
   var activity = new Activity(req.body);
   activity.user = req.user;
 // --------------------------------
-//  edit the activity pendingParticipants format from string to array
+//  edit the activity pendingPaticipents format from string to array
 // -----------------------------------
   activity.save(function(err, activityResponse) {
     if (err) {
@@ -38,24 +38,17 @@ exports.create = function(req, res) {
       });
     } else {
       //send email to the participant
-
-      if(req.user.stage < 2){
-          User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
-            if(err) throw err;
-          });
-        }
       mailgun.sendEmail(activity);
 
-
       var condition, update, options, callback;
-      options = { multi: false, upsert: true };
+      options = {multi: false, upsert: true};
       callback = function(err) {
           console.log('cannot upsert the user with activityId: ' + err);
       };
       //update participant's activity list
       activityResponse.pendingParticipants.forEach(function(participantEmail) {
-        condition = { 'email': participantEmail, 'username': participantEmail };
-        update = { $push: { 'activities': activityResponse._id } };
+        condition = {'email': participantEmail, 'username': participantEmail};
+        update = {$push: {'activities': activityResponse._id}};
         User.findOneAndUpdate(condition, update, options, callback);
       });
 
@@ -183,11 +176,14 @@ exports.optionlist = function(req, res){
   option = option + "Participants";
 
   var activitiesId = req.user.activities;
+
+
   var results = getActivities(activitiesId, myemail, option, sendResponse);
   //debugger;
   function sendResponse(results) {
       res.json(results);
   }
+
 
 };
 
@@ -195,16 +191,19 @@ function getActivities(activitiesId, myemail, option, callback){
   var results = [];
   var count = 0;
   activitiesId.forEach(function(id){
-    count++;
+
     Activity.findOne({'_id' : id}, function(err, activity){
+      count++;
       if(err) throw err;
       else{
-
+         console.log(id);
         if(activity[option].indexOf(myemail) !== -1){
             results.push(activity);
         }
       }
+
       if (count === activitiesId.length){
+
         callback(results);
       }
     });

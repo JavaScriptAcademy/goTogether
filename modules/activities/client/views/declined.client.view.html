@@ -19,7 +19,7 @@
             <a href="/activities/history" data-toggle="tab">History Activities</a>
         </li> -->
   </ul>
-    <table class="table table-bordered">
+    <table ng-show="notEmpaty" class="table table-bordered">
     <tr class="info">
         <th>Activity Name</th>
         <th>Start Time</th>
@@ -34,6 +34,15 @@
     </tr>
 
   </table>
-            <a href="/activities"><button type="button" class="btn btn-default btn-lg">Back</button></a>
+
+  <div class="clear"></div>
+  <br>
+  <br>
+
+  <div class="alert alert-warning text-center" data-ng-if="activities.length==0">
+    No declined invitations.
+  </div>
+
+    <a href="/activities"><button type="button" class="btn btn-default btn-lg">Back</button></a>
 
 </section>

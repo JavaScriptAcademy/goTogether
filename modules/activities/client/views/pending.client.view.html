@@ -1,8 +1,8 @@
 <section>
-  <div class="page-header">
-    <h1>Activities</h1>
-  </div>
-  <ul id="myTab" class="nav nav-tabs">
+    <div class="page-header">
+        <h1>Activities</h1>
+    </div>
+    <ul id="myTab" class="nav nav-tabs">
         <!-- <li>
             <a href="/activities/upcoming" data-toggle="tab">Upcoming Activities</a>
         </li> -->
@@ -21,7 +21,7 @@
 
     </ul>
 
-     <table class="table table-bordered">
+    <table ng-show="notEmpaty" class="table table-bordered">
         <tr class="info">
             <th>Activity Name</th>
             <th>Start Time</th>
@@ -32,16 +32,21 @@
             <td>{{activity.activityName}}</td>
             <td>{{activity.startTime}}</td>
             <td>{{activity.user}}</td>
-            <td><a href='/activities/{{activity._id}}'>View</a></td>
+            <td><a href='/activities/{{activity._id}}/{{vm.authentication.user.email}}'>View</a></td>
         </tr>
 
     </table>
 
-      <!-- <div ng-repeat="activity in vm.activities">
-        {{activity}} -->
 
-      </div>
+    <div class="clear"></div>
+    <br>
+    <br>
 
 
-                <a href="/activities"><button type="button" class="btn btn-default btn-lg">Back</button></a>
+    <div class="alert alert-warning text-center" data-ng-if="activities.length==0">
+    No pending invitations.
+    </div>
+
+
+    <a href="/activities"><button type="button" class="btn btn-default btn-lg">Back</button></a>
 </section>
