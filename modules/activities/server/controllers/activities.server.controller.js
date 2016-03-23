@@ -29,7 +29,7 @@ exports.create = function(req, res) {
   var activity = new Activity(req.body);
   activity.user = req.user;
 // --------------------------------
-//  edit the activity pendingPaticipents format from string to array
+//  edit the activity pendingParticipants format from string to array
 // -----------------------------------
   activity.save(function(err, activityResponse) {
     if (err) {
@@ -38,17 +38,17 @@ exports.create = function(req, res) {
       });
     } else {
       //send email to the participant
-      mailgun.sendEmail(activity);
+      mailgun.sendEmail(activityResponse);
 
       var condition, update, options, callback;
-      options = {multi: false, upsert: true};
+      options = { multi: false, upsert: true };
       callback = function(err) {
           console.log('cannot upsert the user with activityId: ' + err);
       };
       //update participant's activity list
       activityResponse.pendingParticipants.forEach(function(participantEmail) {
-        condition = {'email': participantEmail, 'username': participantEmail};
-        update = {$push: {'activities': activityResponse._id}};
+        condition = { 'email': participantEmail, 'username': participantEmail };
+        update = { $push: { 'activities': activityResponse._id } };
         User.findOneAndUpdate(condition, update, options, callback);
       });
 

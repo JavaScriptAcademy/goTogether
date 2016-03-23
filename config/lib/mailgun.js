@@ -19,7 +19,7 @@ var formEmailBody = function(email,activity){
   var activity_date = '<div><br>Activity Date : </br>' + activity.startDate + ' to ' + activity.endDate + '</div>';
   var activity_time = '<div><br>Activity Time : </br>' + activity.startTime + ' to ' + activity.endTime + '</div>';
   var info = '<div><br>Activity Information : </br>' + activity.activityInfo + '</div>';
-  var link = '<div><a href="http://localhost:3000//activities//' +activity._id+'//'+ email + '">Click here to respond to this invitation.</a></div>';
+  var link = '<div><a href="http://localhost:3000/activities/' +activity._id+'/'+ email + '">Click here to respond to this invitation.</a></div>';
   return greeting + greeting_message + name + location + activity_date + activity_time + info + link;
 };
 
