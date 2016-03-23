@@ -25,7 +25,9 @@
     var friendsID = Authentication.user.friends;
     vm.friends = getFriends(friendsID);
 
-// Get the friends as user object
+
+
+    // Get the friends as user object
     $http({
       url: '/api/activities/getUserFriends',
       method: 'post',
@@ -40,7 +42,8 @@
     if ($location.path().split('/')[3]) {
       $scope.response = true;
       getActivityParticipantStatus(activityId, email);
-      autoSignout(Authentication.user,email);
+      // changeSignupURL();
+      // autoSignout(Authentication.user,email);
     } else {
       $scope.response = false;
     }
@@ -118,37 +121,40 @@
         alert('Reject activity error!');
       });
     }
-    function autoSignout(user,email){
-      console.log(user);
-      console.log("email:"+email);
-      if(user !== null&&user.email !== email){
-        $http({
-          method: 'get',
-          url: '/api/auth/signout'
-        }).then(function successCallback(res) {
-          console.log('succeed in signning out');
-        }, function errorCallback(res){
-          console.log('error in signning out');
-        });
-      }
+    // function autoSignout(user,email){
+    //   if(user !== null && user.email !== email){
+    //     $http({
+    //       method: 'get',
+    //       url: '/api/auth/signout'
+    //     }).then(function successCallback(res) {
+    //       console.log('succeed in signning out');
+    //     }, function errorCallback(res){
+    //       console.log('error in signning out');
+    //     });
+    //   }
+    // }
+    function changeSignupURL(){
+       var signup = document.getElementById('signup');
+       signup.setAttribute('ui-sref', 'authentication.signupwithemail');
+       signup.href = "/authentication/signup/" + email;
     }
     function getFriends(friendsID){
-      var friends = [];
-      friendsID.forEach(function(friendID){
-        $http({
-          method: 'GET',
-          url: '/api/users/friends/' + friendID
-        }).then(function successCallback(response) {
+      // var friends = [];
+      // friendsID.forEach(function(friendID){
+      //   $http({
+      //     method: 'GET',
+      //     url: '/api/users/friends/' + friendID
+      //   }).then(function successCallback(response) {
 
-          friends.push(response.data);
+      //     friends.push(response.data);
 
-        }, function errorCallback(response) {
+      //   }, function errorCallback(response) {
 
-          console.log("get friends info error");
+      //     console.log("get friends info error");
 
-        });
-      });
-      return friends;
+      //   });
+      // });
+      // return friends;
     }
   }
 })();

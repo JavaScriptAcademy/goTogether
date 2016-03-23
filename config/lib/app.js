@@ -7,7 +7,8 @@ var config = require('../config'),
   mongoose = require('./mongoose'),
   express = require('./express'),
   chalk = require('chalk'),
-  seed = require('./seed');
+  seed = require('./seed'),
+  ngrok = require('./ngrok');
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {
@@ -30,6 +31,7 @@ module.exports.init = function init(callback) {
     if (callback) callback(app, db, config);
 
   });
+  ngrok.initConnection();
 };
 
 module.exports.start = function start(callback) {
