@@ -3,8 +3,8 @@
 
   // Activities controller
   angular
-    .module('activities')
-    .controller('ActivitiesController', ActivitiesController);
+  .module('activities')
+  .controller('ActivitiesController', ActivitiesController);
 
   ActivitiesController.$inject = ['$scope', '$state', '$http','Authentication', 'activityResolve', '$location'];
 
@@ -19,21 +19,38 @@
     vm.save = save;
     vm.acceptActivity = acceptActivity;
     vm.rejectActivity = rejectActivity;
+    var activityId = $location.path().split('/')[2];
+    var email = $location.path().split('/')[3];
+
+
+    // Get the friends as user object
+    $http({
+      url: '/api/activities/getUserFriends',
+      method: 'post',
+      data: {
+        friends: Authentication.user.friends
+      }
+    }).then(function(response) {
+      console.log(response.data);
+      vm.friends = response.data;
+    });
 
     if ($location.path().split('/')[3]) {
       $scope.response = true;
-      var email = $location.path().split('/')[3];
-      var activityId = $location.path().split('/')[2];
       getActivityParticipantStatus(activityId, email);
+      changeSignupURL();
+      // autoSignout(Authentication.user,email);
     } else {
       $scope.response = false;
     }
+
     // Remove existing Activity
     function remove() {
       if (confirm('Are you sure you want to delete?')) {
         vm.activity.$remove($state.go('activities.list'));
       }
     }
+
 
     // Save Activity
     function save(isValid) {
@@ -63,8 +80,9 @@
     function getActivityParticipantStatus(activityId, email) {
       $http.get('/api/activities/invitation/' + activityId + '/' + email)
       .success(function(data){
+        console.log('data');
         console.log(data);
-        $scope.isNew = data.isNew;
+        $scope.isPending = data.isPending;
         $scope.isAccepted = data.isAccepted;
       })
       .error(function(err){
@@ -78,24 +96,44 @@
     //participant accpet activity
 
     function acceptActivity(){
-      console.log('participant accept the activity');
-
-      $http.post('/api/activities/invitation/true',vm.activity)
-      .success(function(res){
-        console.log('success proceed user accept activity');
-        $state.go('response', {
-        activityId: res._id
-        });
-      })
-      .error(function(err){
-        console.log('fail proceed user accept activity');
-        $scope.error = err.message;
+    $http({
+      method: 'post',
+      url: '/api/activities/invitation/'+activityId+'/'+email+'/true'
+      }).then(function successCallback(response) {
+        // alert('Success in accepting activity');
+        window.location.reload();
+      }, function errorCallback(response) {
+        alert('Accept activity error!');
       });
     }
-
-    //participant reject activity
-    function rejectActivity(){
-      console.log('participant reject the activity');
+     //participant reject activity
+    function rejectActivity() {
+      $http({
+        method: 'post',
+        url: '/api/activities/invitation/'+activityId+'/'+email+'/false'
+      }).then(function successCallback(response) {
+        window.location.reload();
+      }, function errorCallback(response) {
+        alert('Reject activity error!');
+      });
     }
+    // function autoSignout(user,email){
+    //   if(user !== null && user.email !== email){
+    //     $http({
+    //       method: 'get',
+    //       url: '/api/auth/signout'
+    //     }).then(function successCallback(res) {
+    //       console.log('succeed in signning out');
+    //     }, function errorCallback(res){
+    //       console.log('error in signning out');
+    //     });
+    //   }
+    // }
+    function changeSignupURL(){
+       var signup = document.getElementById('signup');
+       signup.setAttribute('ui-sref', 'authentication.signupwithemail');
+       signup.href = "/authentication/signup/" + email;
+    }
+
   }
 })();

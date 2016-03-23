@@ -5,13 +5,23 @@
     .module('activities')
     .controller('DeclinedController', DeclinedController);
 
-  DeclinedController.$inject = ['$scope'];
+  DeclinedController.$inject = ['$scope', '$http'];
 
-  function DeclinedController($scope) {
+  function DeclinedController($scope, $http) {
     var vm = this;
 
-    // Declined controller logic
-    // ...
+    $http({
+          method: 'GET',
+          url: '/api/declined/activities'
+        }).then(function successCallback(response) {
+
+          $scope.activities = response.data;
+
+        }, function errorCallback(response) {
+
+          console.log("get declined activities info error");
+
+        });
 
     init();
 

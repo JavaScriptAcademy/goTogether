@@ -25,46 +25,106 @@
 </big>
 <p class="lead" data-ng-bind="vm.activity.content"></p>
 <br>
-<hr><br><br><br>
+<hr>
+<div class="form-group" ng-show='response'>
+  <div ng-show='!isPending'>
+   <div ng-show = '!isAccepted'>
+    <p class="control-label label-warning" > You have already reject this invitation.
+      If you want to change, please click the button at the bottom.</p>
+    </div>
+    <div ng-show = 'isAccepted'>
+      <p class="control-label label-warning" > You have already accept this invitation.
+        If you want to change, please click the button at the bottom.</p>
+      </div>
+    </div>
+  </div>
 
-<div class="form-group">
- <label class="col-sm-2 control-label">StartDate:</label>
- <div class="col-sm-3">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
- </div>
- <label class="col-sm-2 control-label">StartTime:</label>
- <div class="col-sm-4">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
- </div>
-</div>
-<div class="clear"></div> <br><br>
+  <div class="form-group">
+     <div class="col-md-2"></div>
 
-<div class="form-group">
- <label class="col-sm-2 control-label">EndDate:</label>
- <div class="col-sm-3">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
+   <label class="col-sm-2 control-label">StartDate:</label>
+   <div class="col-sm-3">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.startDate | date:'mediumDate'"></span>
+   </div>
+   <label class="col-sm-2 control-label">StartTime:</label>
+   <div class="col-sm-2">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.startTime | date:'shortTime'"></span>
+   </div>
  </div>
- <label class="col-sm-2 control-label">EndTime:</label>
- <div class="col-sm-4">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.endTime | date:'shortTime'"></span>
+ <div class="clear"></div> <br><br>
+
+ <div class="form-group">
+     <div class="col-md-2"></div>
+
+   <label class="col-sm-2 control-label">EndDate:</label>
+   <div class="col-sm-3">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.endDate | date:'mediumDate'"></span>
+   </div>
+   <label class="col-sm-2 control-label">EndTime:</label>
+   <div class="col-sm-2">
+     <!-- <input type="text" ng-disabled="!edit"> -->
+     <span data-ng-bind="vm.activity.endTime | date:'shortTime'"></span>
+   </div>
  </div>
-</div>
-<div class="clear"></div> <br><br>
+ <div class="clear"></div> <br><br>
 
 
-<div class="form-group">
- <label class="col-sm-2 control-label">Participant:</label>
- <div class="col-sm-3">
-   <!-- <input type="text" ng-disabled="!edit"> -->
-   <span data-ng-bind="vm.activity.pendingParticipants"></span>
- </div>
+   <div class="form-group">
+     <div class="col-md-2"></div>
+     <label class="col-md-2">Location:</label>
+     <div class="col-md-8">
+      <!-- <input type="text" ng-disabled="!edit"> -->
+      <span data-ng-bind="vm.activity.activityLocation"></span>
+      </div>
+   </div>
+   <div class="clear"></div> <br><br>
+
+   <div class="form-group">
+     <div class="col-md-2"></div>
+     <label class="col-md-2 control-label">Participant:</label>
+     <div class="col-md-3">
+       <div ng-repeat="accepted in vm.acceptedParticipants">
+         <h1>
+         <a ng-if="accepted.displayName !== undefined" href="/users/{{accepted._id}}" style="color: #04B404">{{accepted.displayName}}</a>
+         <span ng-if="accepted.displayName === undefined" style="color: #04B404">{{accepted.email}}</span></h1>
+
+      </div>
+      <div ng-repeat="pending in vm.pendingParticipants">
+         <h1>
+           <a ng-if="pending.displayName !== undefined" href="/users/{{pending._id}}" style="color: grey">{{pending.displayName}}</a>
+           <span ng-if="pending.displayName === undefined" style="color: grey">{{pending.email}}</span>
+         </h1>
+      </div>
+      <div ng-repeat="declined in vm.declinedParticipants">
+         <h1>
+           <a ng-if="declined.displayName !== undefined" href="/users/{{declined._id}}" style="color: red">{{declined.displayName}}</a>
+           <span ng-if="declined.displayName === undefined" style="color: red">{{declined.email}}</span>
+         </h1>
+
+      </div>
+    </div>
+   </div>
+
+ <div class="clear"></div> <br>
+ <div class="form-group" ng-show='response'>
+  <div ng-show='isPending' class="col-sm-offset-5">
+    <a class="btn btn-success" data-ng-click="vm.acceptActivity()">Accept</a>
+    <a class="btn btn-warning col-sm-offset-1" data-ng-click="vm.rejectActivity()">Reject</a>
+  </div>
+  <div ng-show='!isPending'>
+   <div ng-show = '!isAccepted' class="col-sm-offset-5">
+    <a class="btn btn-warning" data-ng-click="vm.acceptActivity()">Accept1</a>
+  </div>
+  <div ng-show = 'isAccepted' class="col-sm-offset-5">
+    <a class="btn btn-success"  data-ng-click="vm.rejectActivity()">Reject1</a>
+  </div>
 </div>
-<div ng-show='response'>
-  <a class="btn btn-success" ng-hide='isAccepted' data-ng-click="vm.acceptActivity()">Accept</a>
-  <a class="btn btn-warning" ng-hide='isDeclined' data-ng-click="vm.rejectActivity()">Reject</a>
 </div>
+<br>
+<br>
+<br>
+<br>
 </section>

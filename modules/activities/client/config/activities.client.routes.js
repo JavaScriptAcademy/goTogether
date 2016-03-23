@@ -10,31 +10,31 @@
   function routeConfig($stateProvider) {
     $stateProvider
       .state('history', {
-        url: '/history',
+        url: '/activities/history',
         templateUrl: 'modules/activities/client/views/history.client.view.html',
         controller: 'HistoryController',
         controllerAs: 'vm'
       })
       .state('pending', {
-        url: '/pending',
+        url: '/activities/pending',
         templateUrl: 'modules/activities/client/views/pending.client.view.html',
         controller: 'PendingController',
         controllerAs: 'vm'
       })
       .state('declined', {
-        url: '/declined',
+        url: '/activities/declined',
         templateUrl: 'modules/activities/client/views/declined.client.view.html',
         controller: 'DeclinedController',
         controllerAs: 'vm'
       })
       .state('upcoming', {
-        url: '/upcoming',
+        url: '/activities/upcoming',
         templateUrl: 'modules/activities/client/views/upcoming.client.view.html',
         controller: 'UpcomingController',
         controllerAs: 'vm'
       })
       .state('accepted', {
-        url: '/accepted',
+        url: '/activities/accepted',
         templateUrl: 'modules/activities/client/views/accepted.client.view.html',
         controller: 'AcceptedController',
         controllerAs: 'vm'
@@ -83,7 +83,7 @@
       .state('activities.view', {
         url: '/:activityId',
         templateUrl: 'modules/activities/client/views/view-activity.client.view.html',
-        controller: 'ActivitiesController',
+        controller: 'ViewActivityController',
         controllerAs: 'vm',
         resolve: {
           activityResolve: getActivity
@@ -131,5 +131,4 @@
   function newActivity(ActivitiesService) {
     return new ActivitiesService();
   }
-
 })();

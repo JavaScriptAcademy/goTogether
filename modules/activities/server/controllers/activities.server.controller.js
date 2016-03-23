@@ -29,7 +29,7 @@ exports.create = function(req, res) {
   var activity = new Activity(req.body);
   activity.user = req.user;
 // --------------------------------
-//  edit the activity pendingPaticipents format from string to array
+//  edit the activity pendingParticipants format from string to array
 // -----------------------------------
   activity.save(function(err, activityResponse) {
     if (err) {
@@ -38,25 +38,30 @@ exports.create = function(req, res) {
       });
     } else {
       //send email to the participant
+
+      if(req.user.stage < 2){
+          User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
+            if(err) throw err;
+          });
+        }
       mailgun.sendEmail(activity);
 
+
       var condition, update, options, callback;
-      options = {multi: false, upsert: true};
+      options = { multi: false, upsert: true };
       callback = function(err) {
           console.log('cannot upsert the user with activityId: ' + err);
       };
       //update participant's activity list
-      activityResponse.pendingParticipants[0].split("; ").forEach(function(participantEmail) {
-        condition = {'email': participantEmail, 'username': participantEmail};
-        update = {$push: {'activities': activityResponse._id}};
+      activityResponse.pendingParticipants.forEach(function(participantEmail) {
+        condition = { 'email': participantEmail, 'username': participantEmail };
+        update = { $push: { 'activities': activityResponse._id } };
         User.findOneAndUpdate(condition, update, options, callback);
       });
-
 
       //update organizer's activity list
       condition = {'email': activity.user.email};
       User.update(condition, update, options, callback);
-
     }
 
       res.jsonp(activity);
@@ -130,6 +135,24 @@ exports.list = function(req, res) {
   });
 };
 
+exports.listByStatus = function(req, res) {
+
+  var participants = req.body.participants;
+
+  User.find({ email: { $in: participants }}, {password:0, salt:0}).exec(function(err, users) {
+    res.jsonp(users);
+  });
+};
+
+
+exports.getUserFriends = function(req, res) {
+
+  var friends = req.body.friends;
+
+  User.find({ _id: { $in: friends }}, {password:0, salt:0}).exec(function(err, users) {
+    res.jsonp(users);
+  });
+};
 /**
  * Activity middleware
  */
@@ -153,5 +176,38 @@ exports.activityByID = function(req, res, next, id) {
     next();
   });
 };
+// get accepted activity list
+exports.optionlist = function(req, res){
+  var myemail = req.user.email;
+  var option = req.params.option;
+  option = option + "Participants";
 
+  var activitiesId = req.user.activities;
+  var results = getActivities(activitiesId, myemail, option, sendResponse);
+  //debugger;
+  function sendResponse(results) {
+      res.json(results);
+  }
 
+};
+
+function getActivities(activitiesId, myemail, option, callback){
+  var results = [];
+  var count = 0;
+  activitiesId.forEach(function(id){
+    count++;
+    Activity.findOne({'_id' : id}, function(err, activity){
+      if(err) throw err;
+      else{
+
+        if(activity[option].indexOf(myemail) !== -1){
+            results.push(activity);
+        }
+      }
+      if (count === activitiesId.length){
+        callback(results);
+      }
+    });
+
+  });
+}

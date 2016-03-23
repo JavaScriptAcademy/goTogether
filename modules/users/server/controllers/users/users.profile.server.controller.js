@@ -115,6 +115,24 @@ exports.search = function (req, res) {
   });
 
 };
+//add by fiona 0321
+// exports.findactivity = function (req, res) {
+
+//   console.log("llll "+ req.params.activity);
+
+//   // User.findOne({'activity':req.params.activity}, function (err, data) {
+//   //   if (err) {
+//   //     return res.status(400).send({
+//   //       message: errorHandler.getErrorMessage(err)
+//   //     });
+//   //   } else {
+//   //     // todo change the below
+//   //     res.json(data);
+//   //   }
+//   // });
+
+// };
+
 /**
  * find user by id
  */

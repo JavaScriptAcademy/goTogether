@@ -153,6 +153,10 @@ a:hover .header-profile-image {
 .searchbar .results span{
   padding-left: 7px;
 }
+.js-example-basic-multiple{
+  width:125% !important;
+  height:60px !important;
+}
 .deleteButton{
 
   border-radius: 10px;
