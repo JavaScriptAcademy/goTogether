@@ -14,9 +14,9 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
       $scope.isCollapsed = !$scope.isCollapsed;
     };
 
-   var signup = document.getElementById('signup');
-   signup.setAttribute('ui-sref', 'authentication.signup');
-   signup.href = '/authentication/signup';
+    var signup = document.getElementById('signup');
+    signup.setAttribute('ui-sref', 'authentication.signup');
+    signup.href = '/authentication/signup';
     // Collapsing the menu after navigation
     $scope.$on('$stateChangeSuccess', function () {
       $scope.isCollapsed = false;
@@ -54,7 +54,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$htt
               // this callback will be called asynchronously
               // when the response is available
           }, function errorCallback(response) {
-
+              $scope.error = response.message;
               // called asynchronously if an error occurs
               // or server returns response with an error status.
             });

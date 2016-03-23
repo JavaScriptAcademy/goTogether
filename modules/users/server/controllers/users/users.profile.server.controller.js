@@ -132,9 +132,25 @@ exports.finduser = function (req, res) {
   });
 
 };
+
+exports.finduserbyemail = function (req, res) {
+
+  User.findOne({ 'email': req.params.email }, function (err, data) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      // todo change the below
+      res.json(data);
+    }
+  });
+
+};
 /**
  * add user's friend
  */
+
 exports.updateFriends = function (req, res) {
   // Init Variables
    var user = req.body.user;
