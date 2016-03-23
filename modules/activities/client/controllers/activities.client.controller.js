@@ -22,10 +22,6 @@
     var activityId = $location.path().split('/')[2];
     var email = $location.path().split('/')[3];
 
-    var friendsID = Authentication.user.friends;
-    vm.friends = getFriends(friendsID);
-
-
 
     // Get the friends as user object
     $http({
@@ -42,7 +38,7 @@
     if ($location.path().split('/')[3]) {
       $scope.response = true;
       getActivityParticipantStatus(activityId, email);
-      // changeSignupURL();
+      changeSignupURL();
       // autoSignout(Authentication.user,email);
     } else {
       $scope.response = false;
@@ -138,23 +134,6 @@
        signup.setAttribute('ui-sref', 'authentication.signupwithemail');
        signup.href = "/authentication/signup/" + email;
     }
-    function getFriends(friendsID){
-      // var friends = [];
-      // friendsID.forEach(function(friendID){
-      //   $http({
-      //     method: 'GET',
-      //     url: '/api/users/friends/' + friendID
-      //   }).then(function successCallback(response) {
 
-      //     friends.push(response.data);
-
-      //   }, function errorCallback(response) {
-
-      //     console.log("get friends info error");
-
-      //   });
-      // });
-      // return friends;
-    }
   }
 })();

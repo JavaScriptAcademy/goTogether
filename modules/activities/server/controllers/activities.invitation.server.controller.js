@@ -46,13 +46,13 @@ exports.read = function(req, res) {
 
 exports.update = function(req, res) {
 
-  // if(req.user){
-  //   if(req.user.stage < 2){
-  //     User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
-  //          if(err) throw err;
-  //     });
-  //   }
-  // }
+  if(req.user){
+    if(req.user.stage < 2){
+      User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
+           if(err) throw err;
+      });
+    }
+  }
 
   var activityId = req.param('activityId');
   var email = req.param('email');
