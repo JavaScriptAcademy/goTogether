@@ -46,7 +46,7 @@ exports.create = function(req, res) {
           console.log('cannot upsert the user with activityId: ' + err);
       };
       //update participant's activity list
-      activityResponse.pendingParticipants[0].split("; ").forEach(function(participantEmail) {
+      activityResponse.pendingParticipants.forEach(function(participantEmail) {
         condition = {'email': participantEmail, 'username': participantEmail};
         update = {$push: {'activities': activityResponse._id}};
         User.findOneAndUpdate(condition, update, options, callback);
