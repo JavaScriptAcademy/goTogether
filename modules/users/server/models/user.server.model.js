@@ -107,6 +107,10 @@ var UserSchema = new Schema({
   active: {
     type: Boolean,
     default: false
+  },
+  stage: {
+    type: Number,
+    default: 0
   }
 
 });
