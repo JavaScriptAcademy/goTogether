@@ -19,7 +19,9 @@
             <a href="/activities/history" >History Activities</a>
         </li> -->
   </ul>
-  <table class="table table-bordered">
+
+
+  <table ng-show="notEmpaty" class="table table-bordered">
     <tr class="info">
         <th>Activity Name</th>
         <th>Start Time</th>
@@ -35,28 +37,15 @@
 
   </table>
 
+  <div class="clear"></div>
+  <br>
+  <br>
 
-    <div class="list-group">
- <!--    <a data-ng-repeat="activity in vm.activities"
-       data-ui-sref="activities.view({ activityId: activity._id })"
-       class="list-group-item">
-
-      <small class="list-group-item-text">
-        <span data-ng-if="activity.activityName" data-ng-bind="activity.activityName" style="font-size:30px"></span>
-        <br>
-        Posted on
-        <span data-ng-bind="activity.created | date:'mediumDate'"></span>
-        by
-        <span data-ng-if="activity.user" data-ng-bind="activity.user.firstName"></span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="activity.name"></h4>
-    </a> -->
-  </div>
 
   <div class="alert alert-warning text-center" data-ng-if="activities.length==0">
-    No accepted invitations?
+    No accepted invitations.
   </div>
-<!-- <a data-ui-sref="activities.create">create one</a> -->
+
 
 
 <a href="/activities"><button type="button" class="btn btn-default btn-lg">Back</button></a>

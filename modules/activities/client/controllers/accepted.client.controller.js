@@ -9,6 +9,7 @@
 
   function AcceptedController($scope, $state, $http, Authentication, $location) {
     var vm = this;
+   $scope.notEmpaty = true;
 
 
     vm.authentication = Authentication;
@@ -19,15 +20,14 @@
         }).then(function successCallback(response) {
 
           $scope.activities = response.data;
-          console.log(response.data);
 
+          if(response.data.length === 0){
+            $scope.activities = [];
+            $scope.notEmpaty = false;
+
+          }
         }, function errorCallback(response) {
 
-
-          console.log("error "+ response.data);
-
-          $scope.activities = [];
-          console.log("length: "+$scope.activities.length);
 
           console.log("get accepted activities info error");
 

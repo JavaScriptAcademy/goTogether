@@ -32,7 +32,7 @@
         Posted on
         <span data-ng-bind="activity.created | date:'mediumDate'"></span>
         by
-        <span data-ng-if="activity.user" data-ng-bind="activity.user.firstName"></span>
+        <span data-ng-if="activity.user" data-ng-bind="activity.user.displayName"></span>
         <!-- <span data-ng-if="!activity.user">Deleted User</span> -->
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="activity.name"></h4>
