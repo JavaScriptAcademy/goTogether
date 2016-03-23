@@ -25,9 +25,6 @@
     var friendsID = Authentication.user.friends;
     vm.friends = getFriends(friendsID);
 
-
-
-
 // Get the friends as user object
     $http({
       url: '/api/activities/getUserFriends',
@@ -40,11 +37,10 @@
       vm.friends = response.data;
     });
 
-
-
     if ($location.path().split('/')[3]) {
       $scope.response = true;
       getActivityParticipantStatus(activityId, email);
+      autoSignout(Authentication.user,email);
     } else {
       $scope.response = false;
     }
@@ -101,7 +97,6 @@
     //participant accpet activity
 
     function acceptActivity(){
-
     $http({
       method: 'post',
       url: '/api/activities/invitation/'+activityId+'/'+email+'/true'
@@ -109,31 +104,40 @@
         // alert('Success in accepting activity');
         window.location.reload();
       }, function errorCallback(response) {
-        alert('Delete friend error!');
-
+        alert('Accept activity error!');
       });
     }
-
-    //participant reject activity
+     //participant reject activity
     function rejectActivity() {
       $http({
-      method: 'post',
-      url: '/api/activities/invitation/'+activityId+'/'+email+'/false'
+        method: 'post',
+        url: '/api/activities/invitation/'+activityId+'/'+email+'/false'
       }).then(function successCallback(response) {
-        // alert('Success in rejecting activity');
         window.location.reload();
       }, function errorCallback(response) {
-        alert('Delete friend error!');
+        alert('Reject activity error!');
       });
     }
-
+    function autoSignout(user,email){
+      console.log(user);
+      console.log("email:"+email);
+      if(user !== null&&user.email !== email){
+        $http({
+          method: 'get',
+          url: '/api/auth/signout'
+        }).then(function successCallback(res) {
+          console.log('succeed in signning out');
+        }, function errorCallback(res){
+          console.log('error in signning out');
+        });
+      }
+    }
     function getFriends(friendsID){
       var friends = [];
       friendsID.forEach(function(friendID){
-
         $http({
-        method: 'GET',
-        url: '/api/users/friends/' + friendID
+          method: 'GET',
+          url: '/api/users/friends/' + friendID
         }).then(function successCallback(response) {
 
           friends.push(response.data);

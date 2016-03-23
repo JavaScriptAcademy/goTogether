@@ -38,7 +38,14 @@ exports.create = function(req, res) {
       });
     } else {
       //send email to the participant
-      mailgun.sendEmail(activityResponse);
+
+      if(req.user.stage < 2){
+          User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
+            if(err) throw err;
+          });
+        }
+      mailgun.sendEmail(activity);
+
 
       var condition, update, options, callback;
       options = { multi: false, upsert: true };
