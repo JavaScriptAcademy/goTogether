@@ -128,6 +128,24 @@ exports.list = function(req, res) {
   });
 };
 
+exports.listByStatus = function(req, res) {
+
+  var participants = req.body.participants;
+
+  User.find({ email: { $in: participants }}, {password:0, salt:0}).exec(function(err, users) {
+    res.jsonp(users);
+  });
+};
+
+
+exports.getUserFriends = function(req, res) {
+
+  var friends = req.body.friends;
+
+  User.find({ _id: { $in: friends }}, {password:0, salt:0}).exec(function(err, users) {
+    res.jsonp(users);
+  });
+};
 /**
  * Activity middleware
  */
@@ -151,5 +169,38 @@ exports.activityByID = function(req, res, next, id) {
     next();
   });
 };
+// get accepted activity list
+exports.optionlist = function(req, res){
+  var myemail = req.user.email;
+  var option = req.params.option;
+  option = option + "Participants";
 
+  var activitiesId = req.user.activities;
+  var results = getActivities(activitiesId, myemail, option, sendResponse);
+  //debugger;
+  function sendResponse(results) {
+      res.json(results);
+  }
 
+};
+
+function getActivities(activitiesId, myemail, option, callback){
+  var results = [];
+  var count = 0;
+  activitiesId.forEach(function(id){
+    count++;
+    Activity.findOne({'_id' : id}, function(err, activity){
+      if(err) throw err;
+      else{
+
+        if(activity[option].indexOf(myemail) !== -1){
+            results.push(activity);
+        }
+      }
+      if (count === activitiesId.length){
+        callback(results);
+      }
+    });
+
+  });
+}

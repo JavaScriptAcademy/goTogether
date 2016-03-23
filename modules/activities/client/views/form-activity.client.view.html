@@ -1,3 +1,4 @@
+
 <section>
   <div class="page-header">
     <h1>{{vm.activity._id ? 'Edit Activity' : 'New Activity'}}</h1>
@@ -49,11 +50,16 @@
 
 
           <h3><label class="control-label" for="pendingParticipants">Invited Friends</label></h3>
-          <textarea name="pendingParticipants" type="text" ng-model="vm.activity.pendingParticipants" id="pendingParticipants" class="form-control" placeholder="Friends' Emails" required></textarea>
+          <select class="js-example-tags form-control" multiple="multiple" ng-model="vm.activity.pendingParticipants" id="pendingParticipants" >
+          <option ng-repeat="friend in vm.friends" value="{{friend.email}}">{{friend.displayName}}</option>
+          </select>
+
 
           <h3><label class="control-label" for="info">Info</label></h3>
           <input name="info" type="text" ng-model="vm.activity.activityInfo" id="info" class="form-control" placeholder="Activity Info">
         </div>
+
+
 
         <div class="form-group">
           <div class="col-md-3"></div>
@@ -75,3 +81,10 @@
     </form>
   </div>
 </section>
+
+<script type="text/javascript">
+  $(".js-example-tags").select2({
+    tags: true
+  });
+
+</script>

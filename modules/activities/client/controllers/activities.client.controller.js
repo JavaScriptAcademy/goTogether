@@ -3,8 +3,8 @@
 
   // Activities controller
   angular
-    .module('activities')
-    .controller('ActivitiesController', ActivitiesController);
+  .module('activities')
+  .controller('ActivitiesController', ActivitiesController);
 
   ActivitiesController.$inject = ['$scope', '$state', '$http','Authentication', 'activityResolve', '$location'];
 
@@ -22,6 +22,21 @@
     var activityId = $location.path().split('/')[2];
     var email = $location.path().split('/')[3];
 
+    var friendsID = Authentication.user.friends;
+    vm.friends = getFriends(friendsID);
+
+// Get the friends as user object
+    $http({
+      url: '/api/activities/getUserFriends',
+      method: 'post',
+      data: {
+        friends: Authentication.user.friends
+      }
+    }).then(function(response) {
+      console.log(response.data);
+      vm.friends = response.data;
+    });
+
     if ($location.path().split('/')[3]) {
       $scope.response = true;
       getActivityParticipantStatus(activityId, email);
@@ -29,12 +44,14 @@
     } else {
       $scope.response = false;
     }
+
     // Remove existing Activity
     function remove() {
       if (confirm('Are you sure you want to delete?')) {
         vm.activity.$remove($state.go('activities.list'));
       }
     }
+
 
     // Save Activity
     function save(isValid) {
@@ -90,8 +107,7 @@
         alert('Accept activity error!');
       });
     }
-
-    //participant reject activity
+     //participant reject activity
     function rejectActivity() {
       $http({
         method: 'post',
@@ -102,18 +118,37 @@
         alert('Reject activity error!');
       });
     }
-
     function autoSignout(user,email){
-      if(user != null&&user.email !== email){
+      console.log(user);
+      console.log("email:"+email);
+      if(user !== null&&user.email !== email){
         $http({
           method: 'get',
-          url: 'api/auth/signout'
+          url: '/api/auth/signout'
         }).then(function successCallback(res) {
           console.log('succeed in signning out');
         }, function errorCallback(res){
-          console.log('error in signning out')
-        })
+          console.log('error in signning out');
+        });
       }
+    }
+    function getFriends(friendsID){
+      var friends = [];
+      friendsID.forEach(function(friendID){
+        $http({
+          method: 'GET',
+          url: '/api/users/friends/' + friendID
+        }).then(function successCallback(response) {
+
+          friends.push(response.data);
+
+        }, function errorCallback(response) {
+
+          console.log("get friends info error");
+
+        });
+      });
+      return friends;
     }
   }
 })();

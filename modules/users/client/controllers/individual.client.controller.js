@@ -18,7 +18,7 @@
 
     var friends = Authentication.user.friends;
 
-    if(friends.includes(user._id)){
+    if(friends.includes(user._id)||Authentication.user._id===user._id){
       $scope.showAFButton=false;
     }
 
