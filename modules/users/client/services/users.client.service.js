@@ -32,3 +32,15 @@ angular.module('users').factory('SearchUser', ['$resource',
     });
   }
 ]);
+
+angular.module('goTogether',[]).factory('PassEmail', function(){
+  var email="";
+    return {
+            getEmail: function () {
+                return email;
+            },
+            setEmail: function(value) {
+                email = value;
+            }
+        };
+});

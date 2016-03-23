@@ -53,7 +53,17 @@
       })
       .state('authentication.signup', {
         url: '/signup',
-        templateUrl: 'modules/users/client/views/authentication/signup.client.view.html'
+        templateUrl: 'modules/users/client/views/authentication/signup.client.view.html',
+        controller:'AuthenticationController',
+        controllerAs: 'vm',
+
+      })
+      .state('authentication.signupwithemail', {
+        url: '/signup/:email',
+        templateUrl: 'modules/users/client/views/authentication/signup.client.view.html',
+        controller:'AuthenticationController',
+        controllerAs: 'vm',
+
       })
       .state('authentication.signin', {
         url: '/signin?err',
@@ -88,9 +98,10 @@
   }
 
   getIndividual.$inject = ['$stateParams', 'SearchUser'];
-
   function getIndividual($stateParams, SearchUser) {
     return SearchUser.get({
       userId: $stateParams.userId
     }).$promise;
   }
+
+
