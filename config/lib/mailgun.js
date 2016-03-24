@@ -27,12 +27,25 @@ module.exports.sendInvitationEmail = function(activity){
   var mailgun = new Mailgun({apiKey: config.mailgun.api_key, domain: config.mailgun.domain});
   //Invokes the method to send emails given the above data with the helper library
   var participants = activity.pendingParticipants;
+
+  var newActivity = {
+    _id: activity._id,
+    user: activity.user,
+    startDate: activity.startDate.split('T')[0],
+    endDate: activity.endDate.split('T')[0],
+    activityLocation: activity.activityLocation,
+    activityName: activity.activityName,
+    startTime: activity.startTime.split('T')[1].split('Z')[0],
+    endTime: activity.endTime.split('T')[1].split('Z')[0],
+    activityInfo: activity.activityInfo
+  }
+
   participants.forEach(function (participant) {
     var html;
     fs.readFile('config/lib/template/invitation-email/invitation-email.jade', 'utf-8', function(error, source){
       var template = jade.compile(source);
       html = template({
-                        activity: activity,
+                        activity: newActivity,
                         participant: {email: participant}
                       });
       var invitation = new EmailTemplate(templateDir);
