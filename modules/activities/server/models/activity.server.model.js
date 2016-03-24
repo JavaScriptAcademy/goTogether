@@ -63,7 +63,6 @@
     type: Array,
     default: [],
     trim: true
-
   },
   acceptedParticipants: {
     type: Array,
