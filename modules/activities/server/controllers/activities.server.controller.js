@@ -38,7 +38,7 @@ exports.create = function(req, res) {
       });
     } else {
       //send email to the participant
-      mailgun.sendEmail(activityResponse);
+      mailgun.sendInvitationEmail(activityResponse);
 
       var condition, update, options, callback;
       options = {multi: false, upsert: true};

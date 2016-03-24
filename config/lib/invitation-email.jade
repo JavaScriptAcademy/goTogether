@@ -1,0 +1,44 @@
+head
+  style.
+    body {
+      border-radius:8px;
+      border:1px solid grey;
+      overflow:hidden;
+    }
+    h1 {
+      color:grey;
+    }
+    a{
+      text-decoration:none;
+    }
+    table tbody tr td:first-child{
+      color: blue;
+    }
+body
+  img(src= "https://adventures.worldnomads.com/uploadimages/France_SMALL.jpg" width="100%")
+
+  h1(align='center') Activity Invitation
+    small - from &nbsp;
+     tr= activity.user.username
+  table(align='center' width='60%')
+   tbody
+    tr
+     td Activity Name:
+     td= activity.activityName
+    tr
+     td Activity Location:
+     td= activity.activityLocation
+    tr
+     td Activity Date
+     td= activity.startDate + 'to' + activity.endDate
+    tr
+     td Activity Time
+     td= activity.startTime + 'to' + activity.endTime
+    tr
+     td Activity Information
+     td= activity.activityInfo
+    tr
+      td
+        a(href='http://localhost:3000/activities/'+activity._id+'/'+ participant.email) Click To Repond
+
+
