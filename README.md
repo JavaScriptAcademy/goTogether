@@ -3,7 +3,7 @@
 ## Table of contents
 
 * [Quick start](#quick-start)
-* [Module Introduction](#module introduction)
+* [Module Introduction](#module-introduction)
 * [Relative Technicals](#relative technicals)
 * [Need to improve](#need to improve)
 
