@@ -32,7 +32,7 @@
         <td>{{activity.activityName}}</td>
         <td>{{activity.startDate | date : 'yyyy-MM-dd EEEE'}}</td>
         <td>{{activity.startTime | date:'shortTime'}}</td>
-        <td><a href='/activities/{{activity._id}}'>View</a></td>
+        <td><a href='/activities/{{activity._id}}/{{vm.authentication.user.email}}'>View</a></td>
     </tr>
 
   </table>
