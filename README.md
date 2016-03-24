@@ -4,8 +4,8 @@
 
 * [Quick start](#quick-start)
 * [Module Introduction](#module-introduction)
-* [Relative Technicals](#relative technicals)
-* [Need to improve](#need to improve)
+* [Relative Technicals](#relative-technicals)
+* [Need to improve](#need-to-improve)
 
 ## Quick start
 
