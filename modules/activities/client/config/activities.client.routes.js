@@ -103,18 +103,6 @@
         data:{
           pageTitle: 'Activity {{ articleResolve.name }}'
         }
-      })
-      .state('response', {
-        url: '/activity/response',
-        templateUrl: 'modules/activities/client/views/response.client.view.html',
-        controller: 'ActivitiesController',
-        controllerAs: 'vm',
-        resolve: {
-          activityResolve: getActivity
-        },
-        data:{
-          pageTitle: 'Activity {{ articleResolve.name }}'
-        }
       });
   }
 

@@ -39,7 +39,7 @@
       $scope.response = true;
       getActivityParticipantStatus(activityId, email);
       changeSignupURL();
-      // autoSignout(Authentication.user,email);
+      autoSignout(Authentication.user,email);
     } else {
       $scope.response = false;
     }
@@ -80,13 +80,11 @@
     function getActivityParticipantStatus(activityId, email) {
       $http.get('/api/activities/invitation/' + activityId + '/' + email)
       .success(function(data){
-        console.log('data');
-        console.log(data);
         $scope.isPending = data.isPending;
         $scope.isAccepted = data.isAccepted;
       })
       .error(function(err){
-        console.log(err);
+        vm.error = res.data;
       });
     }
 
@@ -103,7 +101,7 @@
         // alert('Success in accepting activity');
         window.location.reload();
       }, function errorCallback(response) {
-        alert('Accept activity error!');
+         vm.error = res.data;
       });
     }
      //participant reject activity
@@ -114,26 +112,25 @@
       }).then(function successCallback(response) {
         window.location.reload();
       }, function errorCallback(response) {
-        alert('Reject activity error!');
+         vm.error = res.data;
       });
     }
-    // function autoSignout(user,email){
-    //   if(user !== null && user.email !== email){
-    //     $http({
-    //       method: 'get',
-    //       url: '/api/auth/signout'
-    //     }).then(function successCallback(res) {
-    //       console.log('succeed in signning out');
-    //     }, function errorCallback(res){
-    //       console.log('error in signning out');
-    //     });
-    //   }
-    // }
+    function autoSignout(user,email){
+      if(user !== null && user.email !== email){
+        $http({
+          method: 'get',
+          url: '/api/auth/signout'
+        }).then(function successCallback(res) {
+          Authentication.user = null;
+        }, function errorCallback(res){
+          vm.error = res.data;
+        });
+      }
+    }
     function changeSignupURL(){
        var signup = document.getElementById('signup');
        signup.setAttribute('ui-sref', 'authentication.signupwithemail');
        signup.href = "/authentication/signup/" + email;
     }
-
   }
 })();

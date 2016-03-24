@@ -195,8 +195,9 @@ function getActivities(activitiesId, myemail, option, callback){
   var results = [];
   var count = 0;
   activitiesId.forEach(function(id){
-    count++;
+
     Activity.findOne({'_id' : id}, function(err, activity){
+      count++;
       if(err) throw err;
       else{
 

@@ -1,15 +1,16 @@
 'use strict';
-
 var ngrok = require('ngrok');
 
-module.exports.initConnection = function initConnection(){
-  console.log("gnrok.initConnection is called");
-  ngrok.connect(function (err, url) {
-    console.log("Ngrok start to listen.");
-    console.log("url:"+url);
+module.exports.init = function init(){
+  console.log('Start to build ngrok server');
+  ngrok.connect({
+    addr: 3000, // port or network address
+    authtoken:'591ir6Sda765oX5R8mBAv_5eofrF9ed857oE4qGHvKL'
+  }, function (err, url) {
     if(err){
-      console.log("err: ");
+      console.log("err");
       console.log(err);
-      }
+    }
+    console.log("listen to url:"+url);
   });
-}
+};
