@@ -13,6 +13,7 @@ Several quick start options are available:
 * Install with [Mailgun](http://www.mailgun.com/): `npm install mailgun-js`.
 * Install with [ngrok](https://www.npmjs.com): `npm install ngrok`.
 * Install with [Select2](https://select2.github.io): download and unzip to HOME/public/.
+* Install with [email-templates](http://foundation.zurb.com/emails/email-templates.html):`npm install email-templates`
 
 ## Module Introduction
 
