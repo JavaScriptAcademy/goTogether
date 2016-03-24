@@ -28,16 +28,16 @@
 <hr>
 <div class="form-group" ng-show='response'>
   <div ng-show='!isPending'>
-   <div ng-show = '!isAccepted'>
-    <p class="control-label label-warning" > You have already reject this invitation.
-      If you want to change, please click the button at the bottom.</p>
+    <div ng-show = '!isAccepted' class="alert alert-success text-center">
+      <p style="font-size:18px"> You have already Reject this invitation！
+     </p>
     </div>
-    <div ng-show = 'isAccepted'>
-      <p class="control-label label-warning" > You have already accept this invitation.
-        If you want to change, please click the button at the bottom.</p>
-      </div>
+    <div ng-show = 'isAccepted' class="alert alert-success text-center">
+      <p style="font-size:18px" > You have already Accept this invitation!
+       </p>
     </div>
   </div>
+</div>
 
   <div class="form-group">
      <div class="col-md-2"></div>
