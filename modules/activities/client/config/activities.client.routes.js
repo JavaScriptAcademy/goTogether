@@ -15,7 +15,7 @@
         controller: 'HistoryController',
         controllerAs: 'vm',
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle : 'Activities Create'
         }
       })
@@ -25,7 +25,7 @@
         controller: 'PendingController',
         controllerAs: 'vm',
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle : 'Activities Create'
         }
       })
@@ -35,7 +35,7 @@
         controller: 'DeclinedController',
         controllerAs: 'vm',
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle : 'Activities Create'
         }
       })
@@ -45,7 +45,7 @@
         controller: 'UpcomingController',
         controllerAs: 'vm',
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle : 'Activities Create'
         }
       })
@@ -55,7 +55,7 @@
         controller: 'AcceptedController',
         controllerAs: 'vm',
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle : 'Activities Create'
         }
       })
@@ -64,7 +64,6 @@
         url: '/activities',
         template: '<ui-view/>',
         data: {
-
           pageTitle : 'Activities Create'
         }
       })
@@ -74,7 +73,7 @@
         controller: 'ActivitiesListController',
         controllerAs: 'vm',
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle: 'Activities List'
         }
       })
@@ -87,7 +86,7 @@
           activityResolve: newActivity
         },
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle : 'Activities Create'
         }
       })
@@ -100,7 +99,7 @@
           activityResolve: getActivity
         },
         data: {
-
+          roles: ['admin', 'user'],
           pageTitle: 'Edit Activity {{ activityResolve.name }}'
         }
       })
@@ -114,7 +113,7 @@
           activityResolve: getActivity
         },
         data:{
-
+          roles: ['admin', 'user'],
           pageTitle: 'Activity {{ articleResolve.name }}',
         }
       })
@@ -136,11 +135,10 @@
         controller: 'ActivitiesController',
         controllerAs: 'vm',
         resolve: {
-
           activityResolve: getActivity
         },
         data:{
-
+          roles: ['admin', 'user'],
           pageTitle: 'Activity {{ articleResolve.name }}'
         }
       });
