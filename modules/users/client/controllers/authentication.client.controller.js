@@ -31,25 +31,27 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
     };
 
-    function guestSignup(email){
+    function userSignup(){
 
 
       $http({
-        method: 'POST',
-        url: '/api/auth/signup',
-        data: { guest : $scope.credentials }
-      }).then(function successCallback(response) {
+       method: 'POST',
+       url: '/api/auth/signup',
+       data: { user : $scope.credentials }
+     }).then(function successCallback(response) {
 
-        $scope.authentication.user = response;
+       $scope.authentication.user = response;
 
-                // And redirect to the previous or home page
-        $state.go('introduce', $state.previous.params);
-      }, function errorCallback(response) {
+               // And redirect to the previous or home page
+       $state.go('introduce', $state.previous.params);
+     }, function errorCallback(response) {
 
-        $scope.error = response.message;
-      });
+       $scope.error = response.message;
+     });
 
-    }
+   }
+
+
 
     $scope.signup = function (isValid) {
       $scope.error = null;
@@ -59,8 +61,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
         return false;
       }
+      userSignup();
 
-     if($scope.checkEmail  === true){
+  /*   if($scope.checkEmail  === true){
         guestSignup($scope.credentials.email);
 
 
@@ -74,7 +77,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         }).error(function (response) {
           $scope.error = response.message;
         });
-     }
+     }*/
     };
 
     $scope.signin = function (isValid) {

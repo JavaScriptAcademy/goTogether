@@ -47,6 +47,7 @@ module.exports.sendInvitationEmail = function(activity){
         subject: 'Invitation to ' + activity.activityName ,
         html: html
       };
+      console.log(html);
 
       mailgun.messages().send(data, function (err, body) {
       //If there is an error, render the error page

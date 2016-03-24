@@ -24,31 +24,29 @@ exports.signup = function (req, res) {
   delete req.body.roles;
   var user;
   // Init Variables
-  if(req.body.guest){
-    var guest=req.body.guest;
+  if(req.body.user){
+     var userTemp=req.body.user;
 
-     User.findOne({ 'email': guest.email }, function (err, data) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      user=data;
-      user.username=guest.email;
-      user.firstName=guest.firstName;
-      user.lastName=guest.lastName;
-      user.password=guest.password;
-
-      userSave(req,res,user);
-    }
-  });
-
-
-  }else{
-     user = new User(req.body);
-     userSave(req,res,user);
-  }
-
+      User.findOne({ 'email': userTemp.email }, function (err, data) {
+     if (err) {
+       return res.status(400).send({
+         message: errorHandler.getErrorMessage(err)
+       });
+     } else {
+       if(data===null){
+          user = new User(req.body.user);
+       }else{
+       user=data;
+       user.username=userTemp.email;
+       user.firstName=userTemp.firstName;
+       user.lastName=userTemp.lastName;
+       user.password=userTemp.password;
+       user.stage=0;
+      }
+       userSave(req,res,user);
+     }
+   });
+ }
   // Then save the user
 
 };
