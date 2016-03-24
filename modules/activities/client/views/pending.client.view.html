@@ -30,7 +30,7 @@
         </tr>
         <tr ng-repeat='activity in activities'>
             <td>{{activity.activityName}}</td>
-            <td>{{activity.startTime}}</td>
+            <td>{{activity.startDate | date : 'yyyy-MM-dd EEEE'}}</td>
             <td>{{activity.user}}</td>
             <td><a href='/activities/{{activity._id}}/{{vm.authentication.user.email}}'>View</a></td>
         </tr>

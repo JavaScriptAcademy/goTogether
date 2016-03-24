@@ -62,8 +62,7 @@
   pendingParticipants: {
     type: Array,
     default: [],
-    trim: true,
-    required: 'Paticipant cannot be blank'
+    trim: true
 
   },
   acceptedParticipants: {
