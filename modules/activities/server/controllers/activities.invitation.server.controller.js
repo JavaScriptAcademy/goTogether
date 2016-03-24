@@ -31,14 +31,16 @@ exports.read = function(req, res) {
   function setParticipantPending(isPending) {
     isParticipantPendingFlag = isPending;
   }
-  function setParticipantAccepted(isAccpeted){
+
+  function setParticipantAccepted(isAccpeted) {
     isParticipantAcceptedFlag = isAccpeted;
   }
-  function sendRespond(){
+
+  function sendRespond() {
     res.jsonp({
-    'isPending': isParticipantPendingFlag,
-    'isAccepted': isParticipantAcceptedFlag
-  });
+      'isPending': isParticipantPendingFlag,
+      'isAccepted': isParticipantAcceptedFlag
+    });
   }
   isParticipantPending(activityId, email, setParticipantPending);
   isParticipantAccepted(activityId, email, setParticipantAccepted, sendRespond);
@@ -46,10 +48,14 @@ exports.read = function(req, res) {
 
 exports.update = function(req, res) {
 
-  if(req.user){
-    if(req.user.stage < 2){
-      User.update({'_id' : req.user._id},{'stage' : 2},function(err, response){
-           if(err) throw err;
+  if (req.user) {
+    if (req.user.stage < 2) {
+      User.update({
+        '_id': req.user._id
+      }, {
+        'stage': 2
+      }, function(err, response) {
+        if (err) throw err;
       });
     }
   }
@@ -58,6 +64,7 @@ exports.update = function(req, res) {
   var email = req.param('email');
   var response = req.param('isAccept');
   var isParticipantPendingFlag;
+
   function setParticipantPending(isPending) {
     isParticipantPendingFlag = isPending;
   }
@@ -66,10 +73,9 @@ exports.update = function(req, res) {
 
   Activity.findById(new ObjectId(activityId), function(err, activity) {
     if (isParticipantPendingFlag) {
-      if (response === 'true'){
+      if (response === 'true') {
         addParticipantIntoList(activity.acceptedParticipants, email);
-      }else{
-        //
+      } else {
         addParticipantIntoList(activity.declinedParticipants, email);
       }
       removeParticipantFromList(activity.pendingParticipants, email);
@@ -78,55 +84,54 @@ exports.update = function(req, res) {
         addParticipantIntoList(activity.acceptedParticipants, email);
         removeParticipantFromList(activity.declinedParticipants, email);
       } else {
-        //
         addParticipantIntoList(activity.declinedParticipants, email);
         removeParticipantFromList(activity.acceptedParticipants, email);
       }
     }
-    activity.save(function(err){
+    activity.save(function(err) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
         res.jsonp(activity);
-    }
+      }
     });
   });
 };
 
 
 //operate participant in list
-function addParticipantIntoList(list,email){
-  if(list.indexOf(email)<0){
+function addParticipantIntoList(list, email) {
+  if (list.indexOf(email) < 0) {
     list.push(email);
   }
 }
 
-function removeParticipantFromList(list,email){
+function removeParticipantFromList(list, email) {
   var index = list.indexOf(email);
-  console.log("removeParticipantFromList index:"+index);
-  if( index >= 0 ){
-    list.splice(index,1);
+  console.log("removeParticipantFromList index:" + index);
+  if (index >= 0) {
+    list.splice(index, 1);
   }
 }
 
 //Find the status of participant
-function isParticipantPending(activityId, email, callback){
+function isParticipantPending(activityId, email, callback) {
   var isPending;
-  Activity.findById(new ObjectId(activityId), function(err, activity){
+  Activity.findById(new ObjectId(activityId), function(err, activity) {
     // console.log(activity.pendingParticipants);
     // console.log("email:"+email);
-    if(activity.pendingParticipants.length !== 0){
+    if (activity.pendingParticipants.length !== 0) {
       // console.log("activity.pendingParticipants[0].indexOf(email) >= 0");
-      if(activity.pendingParticipants.indexOf(email) >= 0){
+      if (activity.pendingParticipants.indexOf(email) >= 0) {
         // console.log("isPending = true");
         isPending = true;
-      }else{
+      } else {
         // console.log("isPending = false");
         isPending = false;
       }
-    }else{
+    } else {
       // console.log("activity.pendingParticipants[0].indexOf(email) < 0");
       isPending = false;
     }
@@ -134,19 +139,19 @@ function isParticipantPending(activityId, email, callback){
   });
 }
 
-function isParticipantAccepted(activityId, email, callback, callback2){
+function isParticipantAccepted(activityId, email, callback, callback2) {
   var isAccepted;
-  Activity.findById(new ObjectId(activityId), function(err, activity){
+  Activity.findById(new ObjectId(activityId), function(err, activity) {
     // console.log(activity.acceptedParticipants[0]);
     // console.log("email:"+email);
-    if(activity.acceptedParticipants.length !== 0){
+    if (activity.acceptedParticipants.length !== 0) {
       // console.log("activity.acceptedParticipants.indexOf(email) >= 0");
-      if(activity.acceptedParticipants.indexOf(email) >= 0){
+      if (activity.acceptedParticipants.indexOf(email) >= 0) {
         isAccepted = true;
-      }else{
+      } else {
         isAccepted = false;
       }
-    }else{
+    } else {
       // console.log("activity.acceptedParticipants[0].indexOf(email) < 0");
       isAccepted = false;
     }

@@ -20,6 +20,7 @@
         }).then(function successCallback(response) {
 
           $scope.activities = response.data;
+          console.log("klllllllll:"+response.data);
 
           if(response.data.length === 0){
             $scope.activities = [];

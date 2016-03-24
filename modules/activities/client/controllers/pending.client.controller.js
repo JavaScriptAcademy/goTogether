@@ -18,6 +18,8 @@
         }).then(function successCallback(response) {
 
           $scope.activities = response.data;
+          console.log("klllllllll:"+JSON.stringify(response.data));
+
           if(response.data.length === 0){
             $scope.activities = [];
             $scope.notEmpaty = false;
