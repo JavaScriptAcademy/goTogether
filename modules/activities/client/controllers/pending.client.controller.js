@@ -5,12 +5,12 @@
     .module('activities')
     .controller('PendingController', PendingController);
 
-  PendingController.$inject = ['$scope','$http'];
+  PendingController.$inject = ['$scope','$http','Authentication'];
 
-  function PendingController($scope,$http) {
+  function PendingController($scope, $http, Authentication) {
     var vm = this;
-
-    // vm.authentication = Authentication;
+    vm.authentication = Authentication;
+    $scope.notEmpaty = true;
 
     $http({
           method: 'GET',
@@ -18,6 +18,13 @@
         }).then(function successCallback(response) {
 
           $scope.activities = response.data;
+          console.log("klllllllll:"+JSON.stringify(response.data));
+
+          if(response.data.length === 0){
+            $scope.activities = [];
+            $scope.notEmpaty = false;
+
+          }
 
         }, function errorCallback(response) {
 

@@ -24,7 +24,7 @@
   <div class="list-group">
     <a data-ng-repeat="activity in vm.activities"
        data-ui-sref="activities.view({ activityId: activity._id })"
-       class="list-group-item">
+       class="list-group-item" data-ng-if="activity.user._id===vm.authentication.user._id">
 
       <small class="list-group-item-text">
         <span data-ng-if="activity.activityName" data-ng-bind="activity.activityName" style="font-size:30px"></span>
@@ -32,7 +32,7 @@
         Posted on
         <span data-ng-bind="activity.created | date:'mediumDate'"></span>
         by
-        <span data-ng-if="activity.user" data-ng-bind="activity.user.firstName"></span>
+        <span data-ng-if="activity.user" data-ng-bind="activity.user.displayName"></span>
         <!-- <span data-ng-if="!activity.user">Deleted User</span> -->
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="activity.name"></h4>

@@ -13,36 +13,59 @@
         url: '/activities/history',
         templateUrl: 'modules/activities/client/views/history.client.view.html',
         controller: 'HistoryController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          roles: ['admin', 'user'],
+          pageTitle : 'Activities Create'
+        }
       })
       .state('pending', {
         url: '/activities/pending',
         templateUrl: 'modules/activities/client/views/pending.client.view.html',
         controller: 'PendingController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          roles: ['admin', 'user'],
+          pageTitle : 'Activities Create'
+        }
       })
       .state('declined', {
         url: '/activities/declined',
         templateUrl: 'modules/activities/client/views/declined.client.view.html',
         controller: 'DeclinedController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          roles: ['admin', 'user'],
+          pageTitle : 'Activities Create'
+        }
       })
       .state('upcoming', {
         url: '/activities/upcoming',
         templateUrl: 'modules/activities/client/views/upcoming.client.view.html',
         controller: 'UpcomingController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          roles: ['admin', 'user'],
+          pageTitle : 'Activities Create'
+        }
       })
       .state('accepted', {
         url: '/activities/accepted',
         templateUrl: 'modules/activities/client/views/accepted.client.view.html',
         controller: 'AcceptedController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          roles: ['admin', 'user'],
+          pageTitle : 'Activities Create'
+        }
       })
       .state('activities', {
         abstract: true,
         url: '/activities',
-        template: '<ui-view/>'
+        template: '<ui-view/>',
+        data: {
+          pageTitle : 'Activities Create'
+        }
       })
       .state('activities.list', {
         url: '',
@@ -50,6 +73,7 @@
         controller: 'ActivitiesListController',
         controllerAs: 'vm',
         data: {
+          roles: ['admin', 'user'],
           pageTitle: 'Activities List'
         }
       })
@@ -62,7 +86,7 @@
           activityResolve: newActivity
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin', 'user'],
           pageTitle : 'Activities Create'
         }
       })
@@ -75,7 +99,7 @@
           activityResolve: getActivity
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin', 'user'],
           pageTitle: 'Edit Activity {{ activityResolve.name }}'
         }
       })
@@ -89,6 +113,7 @@
           activityResolve: getActivity
         },
         data:{
+          roles: ['admin', 'user'],
           pageTitle: 'Activity {{ articleResolve.name }}',
         }
       })

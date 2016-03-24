@@ -6,6 +6,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
     $scope.popoverMsg = PasswordValidator.getPopoverMsg();
 
 
+
     // Get an eventual error defined in the URL query string:
     $scope.error = $location.search().err;
     $scope.credentials = {};
@@ -30,6 +31,26 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
 
     };
 
+    function guestSignup(email){
+
+
+      $http({
+        method: 'POST',
+        url: '/api/auth/signup',
+        data: { guest : $scope.credentials }
+      }).then(function successCallback(response) {
+
+        $scope.authentication.user = response;
+
+                // And redirect to the previous or home page
+        $state.go('introduce', $state.previous.params);
+      }, function errorCallback(response) {
+
+        $scope.error = response.message;
+      });
+
+    }
+
     $scope.signup = function (isValid) {
       $scope.error = null;
 
@@ -39,16 +60,21 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         return false;
       }
 
+     if($scope.checkEmail  === true){
+        guestSignup($scope.credentials.email);
 
-      $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
-        // If successful we assign the response to the global user model
-        $scope.authentication.user = response;
 
-        // And redirect to the previous or home page
-        $state.go('introduce', $state.previous.params);
-      }).error(function (response) {
-        $scope.error = response.message;
-      });
+     }else{
+        $http.post('/api/auth/signup', $scope.credentials).success(function (response) {
+          // If successful we assign the response to the global user model
+          $scope.authentication.user = response;
+
+          // And redirect to the previous or home page
+          $state.go('introduce', $state.previous.params);
+        }).error(function (response) {
+          $scope.error = response.message;
+        });
+     }
     };
 
     $scope.signin = function (isValid) {

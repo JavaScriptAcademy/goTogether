@@ -5,10 +5,15 @@
     .module('activities')
     .controller('DeclinedController', DeclinedController);
 
-  DeclinedController.$inject = ['$scope', '$http'];
+  DeclinedController.$inject = ['$scope', '$http','Authentication',];
 
-  function DeclinedController($scope, $http) {
+  function DeclinedController($scope, $http, Authentication) {
     var vm = this;
+
+    $scope.notEmpaty = true;
+
+
+    vm.authentication = Authentication;
 
     $http({
           method: 'GET',
@@ -16,6 +21,11 @@
         }).then(function successCallback(response) {
 
           $scope.activities = response.data;
+
+          if(response.data.length === 0){
+            $scope.activities = [];
+            $scope.notEmpaty = false;
+          }
 
         }, function errorCallback(response) {
 

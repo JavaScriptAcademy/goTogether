@@ -31,7 +31,6 @@
         friends: Authentication.user.friends
       }
     }).then(function(response) {
-      console.log(response.data);
       vm.friends = response.data;
     });
 

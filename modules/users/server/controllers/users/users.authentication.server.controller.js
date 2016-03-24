@@ -20,18 +20,48 @@ var noReturnUrls = [
  */
 exports.signup = function (req, res) {
   // For security measurement we remove the roles from the req.body object
+
   delete req.body.roles;
-
+  var user;
   // Init Variables
-  var user = new User(req.body);
-  var message = null;
+  if(req.body.guest){
+    var guest=req.body.guest;
 
+     User.findOne({ 'email': guest.email }, function (err, data) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      user=data;
+      user.username=guest.email;
+      user.firstName=guest.firstName;
+      user.lastName=guest.lastName;
+      user.password=guest.password;
+
+      userSave(req,res,user);
+    }
+  });
+
+
+  }else{
+     user = new User(req.body);
+     userSave(req,res,user);
+  }
+
+  // Then save the user
+
+};
+
+function userSave(req,res,user){
+
+  var message = null;
+  console.log(user);
   // Add missing user fields
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
   user.active = true;
-  // Then save the user
-  user.save(function (err) {
+    user.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -50,8 +80,7 @@ exports.signup = function (req, res) {
       });
     }
   });
-};
-
+}
 /**
  * Signin after passport authentication
  */
