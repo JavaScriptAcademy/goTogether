@@ -24,7 +24,7 @@
   <div class="list-group">
     <a data-ng-repeat="activity in vm.activities"
        data-ui-sref="activities.view({ activityId: activity._id })"
-       class="list-group-item">
+       class="list-group-item" data-ng-if="activity.user._id===vm.authentication.user._id">
 
       <small class="list-group-item-text">
         <span data-ng-if="activity.activityName" data-ng-bind="activity.activityName" style="font-size:30px"></span>

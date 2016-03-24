@@ -26,7 +26,7 @@
           </div>
 
           <div class="col-md-6">
-            <input name="start-date" type="date" ng-model="vm.activity.startDate" id="start-date" class="form-control" placeholder="Start Date" required>
+            <input name="start-date" type="date" ng-model="vm.activity.startDate" id="start-date" class="form-control" onchange="getMinDate()" placeholder="Start Date" required>
           </div>
           <div class="col-md-6">
             <input name="end-date" type="date" ng-model="vm.activity.endDate" id="end-date" class="form-control" placeholder="End Date">
@@ -86,5 +86,14 @@
   $(".js-example-tags").select2({
     tags: true
   });
+  var today = new Date().toISOString().split('T')[0];
+  $('#start-date').attr('min', today);
+
+  function getMinDate() {
+    var startDate = $('#start-date').val();
+    console.log(startDate);
+    $('#end-date').attr('min', startDate);
+
+  }
 
 </script>

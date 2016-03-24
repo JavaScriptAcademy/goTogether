@@ -22,14 +22,14 @@
     <table ng-show="notEmpaty" class="table table-bordered">
     <tr class="info">
         <th>Activity Name</th>
+        <th>Start Date</th>
         <th>Start Time</th>
-        <th>Organiser</th>
         <th>Action</th>
     </tr>
     <tr ng-repeat='activity in activities'>
         <td>{{activity.activityName}}</td>
-        <td>{{activity.startTime}}</td>
-        <td>{{activity.user}}</td>
+        <td>{{activity.startDate | date : 'yyyy-MM-dd EEEE'}}</td>
+        <td>{{activity.startTime | date : 'hh:mm'}}</td>
         <td><a href='/activities/{{activity._id}}'>View</a></td>
     </tr>
 
