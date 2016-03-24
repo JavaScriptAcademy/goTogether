@@ -1,7 +1,8 @@
 <section>
  <div class="jumbotron">
    <h1 data-ng-bind="vm.activity.activityName"></h1>
-   <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured.</p>
+   <p>Cherish the most precious moments with families and friends. </p><br>
+   <p>Best wishes to you all!</p>
  </div>
  <div class="pull-right"
  data-ng-show="vm.activity.isCurrentUserOwner">
@@ -87,22 +88,22 @@
      <label class="col-md-2 control-label">Participant:</label>
      <div class="col-md-3">
        <div ng-repeat="accepted in vm.acceptedParticipants">
-         <h1>
+         <h4>
          <a ng-if="accepted.displayName !== undefined" href="/users/{{accepted._id}}" style="color: #04B404">{{accepted.displayName}}</a>
-         <span ng-if="accepted.displayName === undefined" style="color: #04B404">{{accepted.email}}</span></h1>
+         <span ng-if="accepted.displayName === undefined" style="color: #04B404">{{accepted.email}}</span></h4>
 
       </div>
       <div ng-repeat="pending in vm.pendingParticipants">
-         <h1>
+         <h4>
            <a ng-if="pending.displayName !== undefined" href="/users/{{pending._id}}" style="color: grey">{{pending.displayName}}</a>
            <span ng-if="pending.displayName === undefined" style="color: grey">{{pending.email}}</span>
-         </h1>
+         </h4>
       </div>
       <div ng-repeat="declined in vm.declinedParticipants">
-         <h1>
+         <h4>
            <a ng-if="declined.displayName !== undefined" href="/users/{{declined._id}}" style="color: red">{{declined.displayName}}</a>
            <span ng-if="declined.displayName === undefined" style="color: red">{{declined.email}}</span>
-         </h1>
+         </h4>
 
       </div>
     </div>
