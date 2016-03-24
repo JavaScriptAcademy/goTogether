@@ -29,15 +29,14 @@ module.exports.sendEmail = function(activity){
   var participants = activity.pendingParticipants;
   participants.forEach(function (participant) {
     var html;
-    fs.readFile('template/invitation-email/invitation-email.jade', 'utf-8', function(error, source){
+    fs.readFile('config/lib/template/invitation-email/invitation-email.jade', 'utf-8', function(error, source){
       var template = jade.compile(source);
       html = template({
                         activity: activity,
                         participant: {email: participant}
                       });
-    });
+      var invitation = new EmailTemplate(templateDir);
 
-    var invitation = new EmailTemplate(templateDir);
     invitation.render(activity, function (err, result) {
       var data = {
         //Specify email data
@@ -60,6 +59,9 @@ module.exports.sendEmail = function(activity){
       }
       });
     });
+    });
+
+
   });
 };
 
