@@ -12,10 +12,11 @@
 Several quick start options are available:
 
 * Clone the repo: `git@github.com:JavaScriptAcademy/goTogether.git`.
-* Install with [Mailgun](http://www.mailgun.com/): `npm install mailgun-js`.
-* Install with [jade](https://www.npmjs.com/package/jade) `npm install jade`
-* Install with [email-templates](http://foundation.zurb.com/emails/email-templates.html):`npm install email-templates`
-* Install with [Select2](https://select2.github.io): download and unzip to HOME/public/.
+* Install all MEAN.JS dependencies: `npm install`.
+* Install [Mailgun](http://www.mailgun.com/): `npm install mailgun-js`.
+* Install [jade](https://www.npmjs.com/package/jade) `npm install jade`
+* Install [email-templates](http://foundation.zurb.com/emails/email-templates.html):`npm install email-templates`
+* Install [Select2](https://select2.github.io): download and unzip to HOME/public/.
 
 ## Module Introduction
 
