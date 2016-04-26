@@ -43,7 +43,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
        $scope.authentication.user = response;
 
                // And redirect to the previous or home page
-       $state.go('introduce', $state.previous.params);
+      // $state.go('introduce', $state.previous.params);
+       $window.location.href='/introduce';
      }, function errorCallback(response) {
 
        $scope.error = response.message;
