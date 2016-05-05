@@ -7,9 +7,9 @@
 * [Relative Technicals](#relative-technicals)
 * [Need to improve](#need-to-improve)
 
-## Quick start
+## Quick Start
 
-Several quick start options are available:
+Following the steps to run the project:
 
 * Clone the repo: `git@github.com:JavaScriptAcademy/goTogether.git`.
 * Install all MEAN.JS dependencies: `npm install`.
@@ -17,6 +17,9 @@ Several quick start options are available:
 * Install [jade](https://www.npmjs.com/package/jade) `npm install jade`
 * Install [email-templates](http://foundation.zurb.com/emails/email-templates.html):`npm install email-templates`
 * Install [Select2](https://select2.github.io): download and unzip to HOME/public/.
+* Start MongoDB, cd to the bin folder of your MongoDB and start it(type `mongod` on Git Bash)
+* Start the application, cd to the project folder and start it(type `grunt --force` on Git Bash)
+* Open your browser and go to the URL `localhost:3000`
 
 ## Module Introduction
 
